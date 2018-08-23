@@ -1,4 +1,4 @@
-package com.agilitysciences.alsdk.onboard;
+package com.example.activeledgersdk.onboard;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,18 +20,13 @@ public boolean is$selfsign() {
 public void set$selfsign(boolean $selfsign) {
 	this.$selfsign = $selfsign;
 }
-public Signature getSig() {
-	return $sigs;
-}
-public void setSig(Signature sig) {
-	this.$sigs = sig;
-}
-@Override
-public String toString() {
-	return "Transaction [$tx=" + $tx + ", $selfsign=" + $selfsign + ", sig=" + $sigs + "]";
-}
 
 
+	public Signature get$sigs() {
+		return $sigs;
+	}
 
-
+	public void set$sigs(Signature $sigs) {
+		this.$sigs = $sigs;
+	}
 }

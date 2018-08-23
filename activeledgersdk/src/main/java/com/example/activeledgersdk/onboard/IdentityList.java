@@ -1,4 +1,4 @@
-package com.agilitysciences.alsdk.onboard;
+package com.example.activeledgersdk.onboard;
 
 public class IdentityList {
 	
@@ -11,6 +11,8 @@ public class IdentityList {
 	public void setIdentity(Identity identity) {
 		this.identity = identity;
 	}
+
+
 
 	@Override
 	public String toString() {

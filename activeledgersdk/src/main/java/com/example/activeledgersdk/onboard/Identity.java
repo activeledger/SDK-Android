@@ -1,4 +1,4 @@
-package com.agilitysciences.alsdk.onboard;
+package com.example.activeledgersdk.onboard;
 
 public class Identity {
 
