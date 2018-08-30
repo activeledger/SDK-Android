@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.activeledgersdk.API.ExecuteTransactionAPI;
 import com.example.activeledgersdk.API.OnboardAPI;
+import com.example.activeledgersdk.Interface.OnTaskCompleted;
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
 import com.example.activeledgersdk.utility.ContractUploading;
@@ -50,13 +51,13 @@ public class ActiveLedgerSDK {
 
     }
 
-    public void onBoardKeys(KeyPair keyPair, String keyName){
+    public void onBoardKeys(KeyPair keyPair, String keyName,OnTaskCompleted listener){
         KEYNAME = keyName;
         JSONObject transaction= OnboardIdentity.getInstance().onboard(keyPair, getKeyType());
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
 
-        OnboardAPI onboardAPI = new OnboardAPI(transactionJson, Utility.getInstance().getContext());
+        OnboardAPI onboardAPI = new OnboardAPI(transactionJson, Utility.getInstance().getContext(), listener);
         onboardAPI.execute();
     }
 
@@ -84,10 +85,6 @@ public class ActiveLedgerSDK {
             e.printStackTrace();
         } catch (SignatureException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -104,4 +101,14 @@ public class ActiveLedgerSDK {
         }
         return null;
     }
+
+
+    public static String readFileAsString(String fileName) throws IOException
+    {
+
+        return Utility.getInstance().readFileAsString(fileName);
+    }
+
+
+
 }

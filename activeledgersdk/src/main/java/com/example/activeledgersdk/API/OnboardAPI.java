@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.activeledgersdk.Interface.OnTaskCompleted;
 import com.example.activeledgersdk.R;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
@@ -24,14 +25,18 @@ import okhttp3.Response;
 
 public class OnboardAPI extends AsyncTask<String, String, String> {
 
+    private OnTaskCompleted listener;
+
+
     public String json;
     public Context context;
 
     public  String onboard_id;
     public  String onboard_name;
-    public OnboardAPI(String json,Context context){
+    public OnboardAPI(String json,Context context,OnTaskCompleted listener){
         this.json = json;
         this.context = context;
+        this.listener=listener;
     }
 
     @Override
@@ -85,16 +90,13 @@ public class OnboardAPI extends AsyncTask<String, String, String> {
             String jsonData = response.body().string();
             Log.e("hit response", jsonData);
 
-//            extractID(jsonData);
+
 
 
             return jsonData;
         } catch (IOException e) {
             Log.e("http error",e.getMessage());
         }
-//        catch (JSONException e) {
-//            e.printStackTrace();
-//        }
 
         return null;
     }
@@ -119,4 +121,16 @@ public class OnboardAPI extends AsyncTask<String, String, String> {
         Log.e("id", PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.onboard_id)));
         Log.e("name",  PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.onboard_name)));
     }
+
+    protected void onPostExecute(String jsonData){
+
+        try {
+            extractID(jsonData);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        listener.onTaskCompleted();
+    }
+
+
 }

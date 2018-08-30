@@ -89,7 +89,7 @@ public class OnboardIdentity {
 		return transaction;
 	}
 	
-	  public static String signMessage(byte[] message, KeyPair keyPair ,KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException, IOException, InvalidKeySpecException {
+	  public static String signMessage(byte[] message, KeyPair keyPair ,KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
 //	  public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException, IOException, InvalidKeySpecException {
 		  Signature sign =null;
 		  KeyFactory factory = null;

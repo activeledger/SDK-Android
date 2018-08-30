@@ -2,15 +2,39 @@ package com.agilitysciences.alsdk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.activeledgersdk.ActiveLedgerSDK;
+import com.example.activeledgersdk.Interface.OnTaskCompleted;
 import com.example.activeledgersdk.utility.KeyType;
+import com.example.activeledgersdk.utility.PreferenceManager;
+import com.example.activeledgersdk.utility.Utility;
 
+import java.io.IOException;
 import java.security.KeyPair;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
+    TextView tv_pubkeys;
+    TextView tv_prikeys;
+    TextView onBoardId_tv;
+    Spinner spinner;
+
+    KeyType keyType = null;
+    KeyPair keyPair = null;
+
+    EditText keyname_et;
+    TextView onBoardName_tv;
 
 
     @Override
@@ -18,12 +42,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        KeyType keyType = KeyType.RSA;
 
-        ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260");
-        KeyPair keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
 
-        ActiveLedgerSDK.getInstance().onBoardKeys(keyPair,"mykey");
+
+        initLayout();
+
+//        KeyType keyType = KeyType.RSA;
+//
+//        ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260");
+//        KeyPair keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
+//
+//        ActiveLedgerSDK.getInstance().onBoardKeys(keyPair,"mykey");
 
 
 //       String json = " {\n" +
@@ -65,5 +94,88 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void initLayout(){
+
+
+        spinner = (Spinner) findViewById(R.id.keytype_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.keytype_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+
+
+        tv_pubkeys = (TextView) findViewById(R.id.pubkey);
+        tv_prikeys = (TextView) findViewById(R.id.prikey);
+        onBoardId_tv = (TextView) findViewById(R.id.onBoardId_tv);
+
+        keyname_et = (EditText) findViewById(R.id.keyname_et);
+
+        onBoardName_tv =(TextView) findViewById(R.id.onBoardName_tv);
+
+    }
+
+
+    public void generatekeys(View view) {
+
+
+        ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260");
+        keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
+
+
+        try {
+            tv_pubkeys.setText(ActiveLedgerSDK.readFileAsString(Utility.PUBLICKEY_FILE));
+            tv_prikeys.setText(ActiveLedgerSDK.readFileAsString(Utility.PRIVATEKEY_FILE));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+
+         Log.e("---->"+pos,""+parent.getItemAtPosition(pos));
+
+         if(pos == 0){
+             keyType = KeyType.RSA;
+         }
+         else{
+             keyType = KeyType.EC;
+         }
+
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
+
+    public void onboardkeys(View view) {
+
+        String keyname = keyname_et.getText().toString();
+
+        if (keyPair != null) {
+            ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, keyname,  new OnTaskCompleted() {
+
+                @Override
+                public void onTaskCompleted() {
+                    onBoardId_tv.setText(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_id)));
+                    onBoardName_tv.setText(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_name)));
+                }
+
+            });
+
+
+
+        } else {
+            Toast.makeText(this, "Generate Keys First", Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
 }

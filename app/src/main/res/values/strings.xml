@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">ALSDK</string>
 
+    <string-array name="keytype_array">
+        <item>RSA</item>
+        <item>Elliptic Curve</item>
+
+    </string-array>
+
 </resources>

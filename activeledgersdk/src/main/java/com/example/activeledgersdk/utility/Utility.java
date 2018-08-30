@@ -26,6 +26,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -174,7 +175,18 @@ public class Utility {
 		return null;
 	}
 
-    public static PrivateKey generatePrivateKeyFromFile(KeyFactory factory, String filename) throws InvalidKeySpecException, IOException {
+    public static PrivateKey generatePrivateKeyFromFile(String filename, KeyType type) throws InvalidKeySpecException, IOException, NoSuchProviderException, NoSuchAlgorithmException {
+
+		KeyFactory factory = null;
+
+		if(type == KeyType.RSA)
+		{
+			factory = KeyFactory.getInstance("RSA", "BC");
+		}
+		else
+		{
+			factory = KeyFactory.getInstance("EC", "BC");
+		}
 
         String filePath = Utility.getInstance().getFilePath(filename);
         Log.e("File Reading","file path = "+filePath);
@@ -187,7 +199,19 @@ public class Utility {
 
     }
 
-    public static PublicKey generatePublicKeyFromFile(KeyFactory factory, String filename) throws InvalidKeySpecException, IOException {
+    public static PublicKey generatePublicKeyFromFile(String filename, KeyType type) throws InvalidKeySpecException, IOException, NoSuchProviderException, NoSuchAlgorithmException {
+
+		KeyFactory factory = null;
+
+		if(type == KeyType.RSA)
+		{
+			factory = KeyFactory.getInstance("RSA", "BC");
+		}
+		else
+		{
+			factory = KeyFactory.getInstance("EC", "BC");
+		}
+
         String filePath = Utility.getInstance().getFilePath(filename);
         Log.e("File Reading","file path = "+filePath);
         File f = new File(filePath);

@@ -1,18 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_alignParentTop="true"
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/activeledgerlogo"
+        />
+
     <TextView
+        android:id="@+id/app_name"
+        android:layout_below="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        android:text="ActiveLedger"
 
-</android.support.constraint.ConstraintLayout>
+        />
+
+            <LinearLayout
+                android:id="@+id/generatekeys_view"
+
+                android:layout_below="@+id/app_name"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                >
+
+                <Spinner
+                    android:id="@+id/keytype_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Generate keys"
+
+                    android:onClick="generatekeys"/>
+
+            </LinearLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/tv_pubkey"
+        android:layout_below="@+id/generatekeys_view"
+        android:layout_width="match_parent"
+        android:text="Public Key:"
+        android:textSize="15dp"
+        android:layout_centerInParent="true"
+        android:textColor="@color/colorPrimaryDark"
+
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/pubkey"
+        android:layout_below="@+id/tv_pubkey"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_prikey"
+        android:layout_below="@+id/pubkey"
+        android:text="Private Key:"
+        android:textSize="15dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/prikey"
+        android:layout_below="@+id/tv_prikey"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+            <LinearLayout
+                android:id="@+id/onboardkeys_view"
+
+                android:layout_below="@+id/prikey"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                >
+
+
+                <EditText
+                    android:id="@+id/keyname_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Key Name"
+                    android:focusableInTouchMode="true"
+
+                    />
+
+
+                <Button
+                    android:id="@+id/btn_onboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="onboard keys"
+                    android:onClick="onboardkeys"/>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/onBoardId_tv_lbl"
+                android:layout_below="@+id/onboardkeys_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Onboard ID:"/>
+
+
+            <TextView
+                android:id="@+id/onBoardId_tv"
+                android:layout_below="@+id/onBoardId_tv_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/onBoardName_tv_lbl"
+                android:layout_below="@+id/onBoardId_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="Onboard Name:"/>
+
+
+            <TextView
+                android:id="@+id/onBoardName_tv"
+                android:layout_below="@+id/onBoardName_tv_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>

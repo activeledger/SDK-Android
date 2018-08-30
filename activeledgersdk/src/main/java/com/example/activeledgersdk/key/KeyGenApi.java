@@ -1,7 +1,5 @@
 package com.example.activeledgersdk.key;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
@@ -49,10 +47,6 @@ public class KeyGenApi {
 				System.out.println("Format pub key:"+pub.getFormat());
 
 
-				Log.e("pub key is ",  ""+ java.util.Base64.getEncoder().encodeToString(pub.getEncoded()));
-				Log.e("priv key is ",  ""+java.util.Base64.getEncoder().encodeToString(priv.getEncoded()));
-
-
 
                 try {
                     Utility.writePem(Utility.PUBLICKEY_FILE, "PUBLIC KEY", pub);
@@ -61,7 +55,6 @@ public class KeyGenApi {
 
 					Utility.writePem(Utility.PRIVATEKEY_FILE, "PRIVATE KEY", priv);
 
-//					Utility.writePem(Utility.PUBLICKEY_FILE, "PUBLIC KEY", pub);
 				}
 
 				} catch (IOException e) {
@@ -107,7 +100,7 @@ public class KeyGenApi {
 			} catch (NoSuchProviderException e) {
 				e.printStackTrace();
 			}
-			keyPairGenerator.initialize(1024);
+			keyPairGenerator.initialize(2048);
 			 return keyPairGenerator.generateKeyPair();
 		}
 		
