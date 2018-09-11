@@ -230,7 +230,7 @@ public class Utility {
 		return mapper.writeValueAsString(object);
 	}
 
-	public String convertButeArrayToString(byte[] byteData) throws JsonProcessingException {
+	public String convertByteArrayToString(byte[] byteData) throws JsonProcessingException {
 
 		return android.util.Base64.encodeToString(byteData, 16);
 	}

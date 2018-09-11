@@ -1,12 +1,15 @@
 package com.agilitysciences.alsdk;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     EditText keyname_et;
     TextView onBoardName_tv;
+    private ProgressBar progressBar;
 
 
     @Override
@@ -42,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.INVISIBLE);
 
 
 
@@ -119,6 +126,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void generatekeys(View view) {
 
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+//                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+//        showProgressbar();
+
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+
 
         ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","5260");
         keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
@@ -133,13 +152,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
 
+//        hideProgressbar();
+
+//        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
+
+
+
     }
 
 
+    public void showProgressbar(){
+        if(progressBar.getVisibility() == View.INVISIBLE){
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+
+    public void hideProgressbar(){
+        if(progressBar.getVisibility() == View.VISIBLE){
+            progressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
-
-         Log.e("---->"+pos,""+parent.getItemAtPosition(pos));
 
          if(pos == 0){
              keyType = KeyType.RSA;
@@ -151,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
     }
 
 
@@ -170,12 +207,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             });
 
-
-
         } else {
             Toast.makeText(this, "Generate Keys First", Toast.LENGTH_SHORT).show();
         }
 
     }
+
+
+
+
 
 }

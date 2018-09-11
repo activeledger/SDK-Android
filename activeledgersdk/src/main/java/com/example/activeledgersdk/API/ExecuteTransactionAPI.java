@@ -50,7 +50,6 @@ public class ExecuteTransactionAPI extends AsyncTask<String, String, String> {
 //             url = new URL("http://127.0.0.1:5260");
 //            url = new URL("http://10.0.2.2:5260");
 //            url = new URL("http://35.195.221.172:5260");
-//            url = new URL(context.getString(R.string.url));
             url = new URL(Utility.getInstance().getHTTPURL());
 
         } catch (MalformedURLException e) {

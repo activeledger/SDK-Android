@@ -105,7 +105,6 @@ public class ActiveLedgerSDK {
 
     public static String readFileAsString(String fileName) throws IOException
     {
-
         return Utility.getInstance().readFileAsString(fileName);
     }
 

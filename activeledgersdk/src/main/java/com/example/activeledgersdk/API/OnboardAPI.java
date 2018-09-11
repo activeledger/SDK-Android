@@ -48,25 +48,13 @@ public class OnboardAPI extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
 
-
-        Log.e("---json----",json);
-
-//        json = "{\"$selfsign\": true,\"$sigs\": {\"identity\": \"MEQCIBymAYk2UcDrpqRAV88lznvG5PxuGhUM+s3+wOzYCuwoAiBAqaQ7pN2foPqAOGr+SwL2Xs+vg4L6poOtILh4KYNNwA==\"},\"$tx\": {\"$contract\": \"onboard\",\"$namespace\": \"default\",\"$i\": {\"identity\": {\"publicKey\": \"-----BEGIN PUBLIC KEY-----\\nMFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAEzSsRFvLAALl6R7p2myK8vU8OzwiQ8Xoq\\nuTG+5nCJWYZu5mJLnlItlkxXv7K/Jp66WhROB6weEUTS1aNAS5e11Q==\\n-----END PUBLIC KEY-----\\n\",\"type\": \"secp256k1\"}}}}";
-//
-//
-//        Log.e("---json----",json);
-
-
         final MediaType JSON
                 = MediaType.parse("application/json; charset=utf-8");
 
         OkHttpClient client = new OkHttpClient();
         URL url= null;
         try {
-//             url = new URL("http://127.0.0.1:5260");
-//            url = new URL("http://10.0.2.2:5260");
-//            url = new URL("http://35.195.221.172:5260");
-//            url = new URL(context.getString(R.string.url));
+
             url = new URL(Utility.getInstance().getHTTPURL());
 
 
