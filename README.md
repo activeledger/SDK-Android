@@ -1,4 +1,4 @@
-# ActiveLedgerSDK_Android
+# SDK-Android
 
 
 ## SDK Dev Instruction
