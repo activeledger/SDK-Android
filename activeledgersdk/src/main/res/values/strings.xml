@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ActiveledgerSDK</string>
+    <string name="url">http://testnet-uk.activeledger.io:5260</string>
+    <string name="preference_file_key">SDK Pref File</string>>
+</resources>
