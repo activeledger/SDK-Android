@@ -1,3 +1,6 @@
+<img src="https://www.activeledger.io/wp-content/uploads/2018/09/Asset-23.png" alt="Activeledger" width="500"/>
+
+
 # Activeledger SDK-Android
 
 
