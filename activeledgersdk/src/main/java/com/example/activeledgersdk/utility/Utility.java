@@ -7,6 +7,8 @@ import com.example.activeledgersdk.R;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.spongycastle.util.encoders.Base64;
 import org.spongycastle.util.io.pem.PemObject;
@@ -78,7 +80,6 @@ public class Utility {
 		return PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.protocol)) + "://"+
 		PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.ip)) + ":"+
 		PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.port));
-
 
 	}
 
@@ -240,6 +241,24 @@ public class Utility {
 
 	public String convertJSONObjectToString(JSONObject jsonObject){
     	return jsonObject.toString().replace("\\/","/");
+	}
+
+	public void extractID(String response) throws JSONException {
+		JSONObject Jobject = new JSONObject(response);
+		String name = Jobject.optString("$streams");
+		Log.e("stream", name);
+
+		JSONObject JobjectName = new JSONObject(name);
+		JSONArray jsonArray = JobjectName.getJSONArray("new");
+		JSONObject idObj = jsonArray.getJSONObject(0);
+
+
+		PreferenceManager.getInstance().saveString(context.getString(R.string.onboard_id),idObj.optString("id"));
+		PreferenceManager.getInstance().saveString(context.getString(R.string.onboard_name),idObj.optString("name"));
+
+
+		Log.e("id", PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.onboard_id)));
+		Log.e("name",  PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.onboard_name)));
 	}
 
 
