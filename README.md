@@ -58,16 +58,20 @@ ActiveLedgerSDK.getInstance().initSDK(this,"http","testnet-uk.activeledger.io","
 
 ## Generate KeyPair
 
+Generating a KeyPair will give an Observable in return. User RxAndroid to subscribe to the Obserable.
+
 ```Java
-KeyPair keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(KeyType,SaveKeysToFile);
+Observable<KeyPair> keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(KeyType,SaveKeysToFile);
 Example:
-KeyPair keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
+Observable<KeyPair> keyPair = ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType,true);
 ```
 
 ## Oboard KeyPair
 
+Onboarding a KeyPair will give an Observable in return. User RxAndroid to subscribe to the Obserable.
+
 ```Java
-ActiveLedgerSDK.getInstance().onBoardKeys(KeyPair, "KeyName");
+Observable<String> response = ActiveLedgerSDK.getInstance().onBoardKeys(KeyPair, "KeyName");
 Example:
 ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey");
 ```
