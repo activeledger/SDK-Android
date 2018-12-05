@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,6 +14,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+=======
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
     <ScrollView
         android:layout_width="match_parent"
@@ -72,12 +81,19 @@
                     />
 
                 <Button
+<<<<<<< HEAD
                     android:id="@+id/generate_keys"
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Generate keys"
 
+<<<<<<< HEAD
                     android:onClick="@{viewmodel::generatekeys}"/>
+=======
+                    android:onClick="generatekeys"/>
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
             </LinearLayout>
 
@@ -96,6 +112,7 @@
         android:layout_height="wrap_content" />
 
     <TextView
+<<<<<<< HEAD
             android:id="@+id/pubkey"
             android:layout_below="@+id/tv_pubkey"
             android:layout_width="match_parent"
@@ -103,6 +120,13 @@
             android:layout_height="wrap_content" />
 
 
+=======
+        android:id="@+id/pubkey"
+        android:layout_below="@+id/tv_pubkey"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content" />
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
     <TextView
         android:id="@+id/tv_prikey"
@@ -118,7 +142,10 @@
         android:id="@+id/prikey"
         android:layout_below="@+id/tv_prikey"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:text = "@{viewmodel.privatekey}"
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
         android:layout_height="wrap_content" />
 
 
@@ -142,7 +169,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="Enter Key Name"
+<<<<<<< HEAD
                     android:text="@={viewmodel.keyname}"
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
                     android:focusableInTouchMode="true"
 
                     />
@@ -153,7 +183,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="onboard keys"
+<<<<<<< HEAD
                     android:onClick="@{viewmodel::onboardkeys}"/>
+=======
+                    android:onClick="onboardkeys"/>
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 
             </LinearLayout>
@@ -176,7 +210,10 @@
             <TextView
                 android:id="@+id/onBoardId_tv"
                 android:layout_below="@+id/onBoardId_tv_lbl"
+<<<<<<< HEAD
                 android:text="@{viewmodel.onBoardId}"
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -193,7 +230,10 @@
             <TextView
                 android:id="@+id/onBoardName_tv"
                 android:layout_below="@+id/onBoardName_tv_lbl"
+<<<<<<< HEAD
                 android:text="@{viewmodel.onBoardName}"
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -202,6 +242,10 @@
         </RelativeLayout>
 
     </ScrollView>
+<<<<<<< HEAD
 </RelativeLayout>
 
 </layout>
+=======
+</RelativeLayout>
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e

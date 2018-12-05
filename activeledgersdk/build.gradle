@@ -1,5 +1,8 @@
 apply plugin: 'com.android.library'
+<<<<<<< HEAD
 //apply from: 'maven-push.gradle'
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 android {
     compileSdkVersion 26
@@ -48,6 +51,7 @@ dependencies {
     implementation 'com.madgag.spongycastle:bcpg-jdk15on:1.58.0.0'
 
     implementation 'javax.ws.rs:javax.ws.rs-api:2.0'
+<<<<<<< HEAD
 
 
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
@@ -64,4 +68,6 @@ dependencies {
     // Retrofit Scalars Converter
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 }

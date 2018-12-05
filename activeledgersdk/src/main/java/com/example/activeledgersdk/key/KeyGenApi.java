@@ -15,18 +15,28 @@ import java.security.Security;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.ECGenParameterSpec;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.Utility;
 import org.spongycastle.crypto.DataLengthException;
 
+<<<<<<< HEAD
 import io.reactivex.Observable;
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 public class KeyGenApi {
 
 
+<<<<<<< HEAD
         public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile) {
+=======
+        public KeyPair generateKeyPair(KeyType keyType,boolean saveKeysToFile) {
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 			KeyPair keyPair= null;
 	    	try {
@@ -71,7 +81,10 @@ public class KeyGenApi {
 				e.printStackTrace();
 			}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 		return keyPair;
 		}
 		

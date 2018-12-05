@@ -14,5 +14,8 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 }

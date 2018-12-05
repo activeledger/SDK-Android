@@ -1,8 +1,14 @@
 package com.example.activeledgersdk;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.util.Log;
 
+=======
+
+import com.example.activeledgersdk.API.ExecuteTransactionAPI;
+import com.example.activeledgersdk.API.OnboardAPI;
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 import com.example.activeledgersdk.Interface.OnTaskCompleted;
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
@@ -10,7 +16,10 @@ import com.example.activeledgersdk.utility.ContractUploading;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.Utility;
 
+<<<<<<< HEAD
 import org.json.JSONException;
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -19,6 +28,7 @@ import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
+<<<<<<< HEAD
 
 
 import io.reactivex.Observable;
@@ -27,6 +37,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+=======
+import java.security.spec.InvalidKeySpecException;
+import java.util.concurrent.ExecutionException;
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 public class ActiveLedgerSDK {
 
@@ -48,6 +62,7 @@ public class ActiveLedgerSDK {
     }
 
 
+<<<<<<< HEAD
     public Observable<KeyPair> generateAndSetKeyPair(KeyType keyType, boolean saveKeysToFile){
 
         KeyGenApi keyGenApi = new KeyGenApi();
@@ -57,11 +72,24 @@ public class ActiveLedgerSDK {
 
 
     public Observable<String> onBoardKeys(KeyPair keyPair, String keyName){
+=======
+    public KeyPair generateAndSetKeyPair(KeyType keyType, boolean saveKeysToFile){
+
+            KeyGenApi keyGenApi = new KeyGenApi();
+            setKeyType(keyType);
+           return keyGenApi.generateKeyPair(keyType,saveKeysToFile);
+
+
+    }
+
+    public void onBoardKeys(KeyPair keyPair, String keyName,OnTaskCompleted listener){
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
         KEYNAME = keyName;
         JSONObject transaction= OnboardIdentity.getInstance().onboard(keyPair, getKeyType());
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
 
+<<<<<<< HEAD
 
        return executeTransaction(transactionJson);
     }
@@ -73,6 +101,10 @@ public class ActiveLedgerSDK {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 
+=======
+        OnboardAPI onboardAPI = new OnboardAPI(transactionJson, Utility.getInstance().getContext(), listener);
+        onboardAPI.execute();
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
     }
 
     public void setKeyType(KeyType keyType){
@@ -104,6 +136,21 @@ public class ActiveLedgerSDK {
     }
 
 
+<<<<<<< HEAD
+=======
+    public static String executeTransaction(String json){
+        ExecuteTransactionAPI executeTransactionAPI = new ExecuteTransactionAPI(json , Utility.getInstance().getContext());
+        try {
+            return executeTransactionAPI.execute().get().toString();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
     public static String readFileAsString(String fileName) throws IOException
     {

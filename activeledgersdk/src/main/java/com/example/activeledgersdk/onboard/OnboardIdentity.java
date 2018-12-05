@@ -90,6 +90,10 @@ public class OnboardIdentity {
 	}
 	
 	  public static String signMessage(byte[] message, KeyPair keyPair ,KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
+<<<<<<< HEAD
+=======
+//	  public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException, IOException, InvalidKeySpecException {
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 		  Signature sign =null;
 		  KeyFactory factory = null;
 

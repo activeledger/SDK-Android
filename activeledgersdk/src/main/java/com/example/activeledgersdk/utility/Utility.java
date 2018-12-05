@@ -7,8 +7,11 @@ import com.example.activeledgersdk.R;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+<<<<<<< HEAD
 import org.json.JSONArray;
 import org.json.JSONException;
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 import org.json.JSONObject;
 import org.spongycastle.util.encoders.Base64;
 import org.spongycastle.util.io.pem.PemObject;
@@ -81,6 +84,10 @@ public class Utility {
 		PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.ip)) + ":"+
 		PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.port));
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 	}
 
 
@@ -243,6 +250,7 @@ public class Utility {
     	return jsonObject.toString().replace("\\/","/");
 	}
 
+<<<<<<< HEAD
 	public void extractID(String response) throws JSONException {
 		JSONObject Jobject = new JSONObject(response);
 		String name = Jobject.optString("$streams");
@@ -261,6 +269,8 @@ public class Utility {
 		Log.e("name",  PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.onboard_name)));
 	}
 
+=======
+>>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 
 }
