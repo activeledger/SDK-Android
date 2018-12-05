@@ -6,21 +6,43 @@
 To use the Android SDK please Add it in your root build.gradle at the end of repositories:
 
 ```Java
-	allprojects {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-		}
+allprojects {
+	repositories {
+		maven { url 'https://jitpack.io' }
 	}
+}
 ```
 
 Add the dependency
 
 ```Java
-	dependencies {
-	        implementation 'com.github.activeledger:SDK-Android:Tag'
-	}
+dependencies {
+	implementation 'com.github.activeledger:SDK-Android:Tag'
+}
 ```
+
+For Maven:
+
+```Java
+<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+Add the dependency
+
+```Java
+<dependency>
+	<groupId>com.github.activeledger</groupId>
+	<artifactId>SDK-Android</artifactId>
+	<version>Tag</version>
+</dependency>
+```
+
+###NOTE: Please update the Tag : 0.1.1
 
 ## SDK Dev Instruction
 
