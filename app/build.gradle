@@ -1,59 +1,45 @@
 apply plugin: 'com.android.application'
 
-<<<<<<< HEAD
-
 android {
 
     dataBinding {
         enabled = true
     }
 
-=======
-android {
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-    compileSdkVersion 26
-    defaultConfig {
-        applicationId "com.agilitysciences.alsdk"
-        minSdkVersion 26
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-<<<<<<< HEAD
+    android {
+        compileSdkVersion 26
+        defaultConfig {
+            applicationId "com.agilitysciences.alsdk"
+            minSdkVersion 26
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+
+
+        packagingOptions {
+            exclude 'META-INF/DEPENDENCIES'
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/LICENSE.txt'
+            exclude 'META-INF/license.txt'
+            exclude 'META-INF/NOTICE'
+            exclude 'META-INF/NOTICE.txt'
+            exclude 'META-INF/notice.txt'
+            exclude 'META-INF/ASL2.0'
+            exclude 'META-INF/rxjava.properties'
+            exclude 'META-INF/proguard/androidx-annotations.pro'
+
+        }
+
     }
-
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/ASL2.0'
-<<<<<<< HEAD
-        exclude 'META-INF/rxjava.properties'
-        exclude 'META-INF/proguard/androidx-annotations.pro'
-
-    }
-
-=======
-    }
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 }
 
 
@@ -66,20 +52,15 @@ repositories {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-<<<<<<< HEAD
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-=======
     implementation 'com.android.support:appcompat-v7:26.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(":activeledgersdk")
 
-
-<<<<<<< HEAD
     // RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
 
@@ -99,6 +80,4 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.0"
     implementation "android.arch.lifecycle:viewmodel:1.1.0"
 
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 }

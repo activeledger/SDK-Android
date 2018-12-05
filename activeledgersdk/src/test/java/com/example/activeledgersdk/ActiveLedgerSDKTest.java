@@ -6,7 +6,7 @@ public class ActiveLedgerSDKTest {
 
 
     @Test
-    public void test1(){
+    public void test1() {
         ActiveLedgerSDK activeLedgerSDK = new ActiveLedgerSDK();
     }
 

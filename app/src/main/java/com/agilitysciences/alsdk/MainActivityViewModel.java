@@ -4,13 +4,17 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 import android.view.View;
+
 import com.example.activeledgersdk.ActiveLedgerSDK;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
+
 import org.json.JSONException;
+
 import java.io.IOException;
 import java.security.KeyPair;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -125,7 +129,7 @@ public class MainActivityViewModel extends ViewModel {
     }
 
     public void activityOnDestroy() {
-        if (disposable !=null && !disposable.isDisposed())
+        if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
     }
 

@@ -1,16 +1,11 @@
-<<<<<<< HEAD
+
 # [Android] ========================
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 # Built application files
 *.apk
 *.ap_
 
-<<<<<<< HEAD
 # Files for the Dalvik VM
-=======
 # Files for the ART/Dalvik VM
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 *.dex
 
 # Java class files
@@ -19,10 +14,7 @@
 # Generated files
 bin/
 gen/
-<<<<<<< HEAD
-=======
 out/
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 # Gradle files
 .gradle/
@@ -37,7 +29,6 @@ proguard/
 # Log Files
 *.log
 
-<<<<<<< HEAD
 
 ## Directory-based project format:
 .idea/
@@ -97,7 +88,6 @@ hs_err_pid*
 **/*.iml
 *.class
 
-=======
 # Android Studio Navigation editor temp files
 .navigation/
 
@@ -135,4 +125,3 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e

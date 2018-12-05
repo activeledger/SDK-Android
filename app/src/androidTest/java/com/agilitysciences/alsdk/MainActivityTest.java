@@ -1,7 +1,5 @@
 package com.agilitysciences.alsdk;
 
-import android.support.test.espresso.Espresso;
-import android.support.test.espresso.ViewAction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -34,11 +32,14 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class MainActivityTest {
+
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule =
+            new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void setUp() throws Exception {
@@ -47,10 +48,6 @@ public class MainActivityTest {
     @After
     public void tearDown() throws Exception {
     }
-
-    @Rule
-    public ActivityTestRule<MainActivity> mActivityRule =
-            new ActivityTestRule<>(MainActivity.class);
 
     @Test
     public void listGoesOverTheFold() {
@@ -64,7 +61,7 @@ public class MainActivityTest {
 
 
     @Test
-    public void clickGenerateKeys_populatePublicKey(){
+    public void clickGenerateKeys_populatePublicKey() {
         onView(withId(R.id.pubkey)).check(matches(withText("")));
         onView(withText("Generate keys")).perform(click());
         try {
@@ -75,7 +72,7 @@ public class MainActivityTest {
     }
 
     @Test
-    public void clickGenerateKeys_populatePrivateKey(){
+    public void clickGenerateKeys_populatePrivateKey() {
         onView(withId(R.id.prikey)).check(matches(withText("")));
         onView(withText("Generate keys")).perform(click());
         try {
@@ -86,15 +83,15 @@ public class MainActivityTest {
     }
 
     @Test
-    public void changeSpinnerValue(){
+    public void changeSpinnerValue() {
         onView(withId(R.id.keytype_spinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)),is("Elliptic Curve"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Elliptic Curve"))).perform(click());
         onView(withId(R.id.keytype_spinner)).check(matches(withSpinnerText(containsString("Elliptic Curve"))));
     }
 
 
     @Test
-    public void clickOnboardKeys_validResponse(){
+    public void clickOnboardKeys_validResponse() {
         onView(withText("Generate keys")).perform(click());
 
         onView(withId(R.id.keyname_et)).check(matches(withText("")));
@@ -113,9 +110,9 @@ public class MainActivityTest {
 
 
     @Test
-    public void changeSpinnerValue_generateECKey_validResponse(){
+    public void changeSpinnerValue_generateECKey_validResponse() {
         onView(withId(R.id.keytype_spinner)).perform(click());
-        onData(allOf(is(instanceOf(String.class)),is("Elliptic Curve"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Elliptic Curve"))).perform(click());
         onView(withId(R.id.keytype_spinner)).check(matches(withSpinnerText(containsString("Elliptic Curve"))));
 
         onView(withText("Generate keys")).perform(click());
@@ -140,7 +137,6 @@ public class MainActivityTest {
         onView(withId(R.id.onBoardName_tv)).perform(scrollTo()).check(matches(not(withText(""))));
 
     }
-
 
 
 }

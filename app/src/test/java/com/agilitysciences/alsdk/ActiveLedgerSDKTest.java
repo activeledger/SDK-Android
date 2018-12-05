@@ -13,7 +13,7 @@ public class ActiveLedgerSDKTest {
 
 
     @Test
-    public void test1(){
+    public void test1() {
 //        MainActivity mainActivity = mock(MainActivity.class);
 //        ActiveLedgerSDK activeLedgerSDK = new ActiveLedgerSDK();
 //        activeLedgerSDK.initSDK(mainActivity,"http","activeledger","5040");

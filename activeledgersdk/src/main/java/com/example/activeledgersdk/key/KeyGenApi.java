@@ -1,5 +1,10 @@
 package com.example.activeledgersdk.key;
 
+import com.example.activeledgersdk.utility.KeyType;
+import com.example.activeledgersdk.utility.Utility;
+
+import org.spongycastle.crypto.DataLengthException;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
@@ -15,130 +20,100 @@ import java.security.Security;
 import java.security.interfaces.RSAPrivateCrtKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.ECGenParameterSpec;
-<<<<<<< HEAD
-
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-import com.example.activeledgersdk.utility.KeyType;
-import com.example.activeledgersdk.utility.Utility;
-import org.spongycastle.crypto.DataLengthException;
-
-<<<<<<< HEAD
-import io.reactivex.Observable;
-
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
 
 public class KeyGenApi {
 
 
-<<<<<<< HEAD
-        public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile) {
-=======
-        public KeyPair generateKeyPair(KeyType keyType,boolean saveKeysToFile) {
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+    static boolean isValidRSAPair(KeyPair pair) {
+        Key key = pair.getPrivate();
+        if (key instanceof RSAPrivateCrtKey) {
+            RSAPrivateCrtKey pvt = (RSAPrivateCrtKey) key;
+            BigInteger e = pvt.getPublicExponent();
+            RSAPublicKey pub = (RSAPublicKey) pair.getPublic();
+            return e.equals(pub.getPublicExponent()) &&
+                    pvt.getModulus().equals(pub.getModulus());
+        } else {
+            throw new IllegalArgumentException("Not a CRT RSA key.");
+        }
+    }
 
-			KeyPair keyPair= null;
-	    	try {
+    public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile) {
 
-				Security.addProvider(new org.spongycastle.jce.provider.BouncyCastleProvider());
+        KeyPair keyPair = null;
+        try {
 
-
-	    		if(keyType == KeyType.RSA) {
-						keyPair = createRSAKeyPair();
-				}
-	    		else {
-		    		keyPair=createSecp256k1KeyPair();
-	    		}
-
-
-
-				PrivateKey priv =keyPair.getPrivate();
-				PublicKey pub =  keyPair.getPublic();
-
-				System.out.println("Format pri key:"+priv.getFormat());
-				System.out.println("Format pub key:"+pub.getFormat());
+            Security.addProvider(new org.spongycastle.jce.provider.BouncyCastleProvider());
 
 
+            if (keyType == KeyType.RSA) {
+                keyPair = createRSAKeyPair();
+            } else {
+                keyPair = createSecp256k1KeyPair();
+            }
 
-                try {
-                    Utility.writePem(Utility.PUBLICKEY_FILE, "PUBLIC KEY", pub);
 
-                    if(saveKeysToFile) {
+            PrivateKey priv = keyPair.getPrivate();
+            PublicKey pub = keyPair.getPublic();
 
-					Utility.writePem(Utility.PRIVATEKEY_FILE, "PRIVATE KEY", priv);
+            System.out.println("Format pri key:" + priv.getFormat());
+            System.out.println("Format pub key:" + pub.getFormat());
 
-				}
 
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-	    		
-			} 
-	    	catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (DataLengthException e) {
-				e.printStackTrace();
-			}
+            try {
+                Utility.writePem(Utility.PUBLICKEY_FILE, "PUBLIC KEY", pub);
 
-<<<<<<< HEAD
+                if (saveKeysToFile) {
 
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-		return keyPair;
-		}
-		
-		public KeyPair createSecp256k1KeyPair()  {
+                    Utility.writePem(Utility.PRIVATEKEY_FILE, "PRIVATE KEY", priv);
 
-			KeyPairGenerator keyPairGenerator = null;
-			try {
-				keyPairGenerator = KeyPairGenerator.getInstance("ECDSA", "SC");
+                }
 
-			ECGenParameterSpec ecGenParameterSpec = new ECGenParameterSpec("secp256k1");
-			keyPairGenerator.initialize(ecGenParameterSpec,new SecureRandom());
-			} catch (NoSuchAlgorithmException e) {
-				e.printStackTrace();
-			} catch (NoSuchProviderException e) {
-				e.printStackTrace();
-			} catch (InvalidAlgorithmParameterException e) {
-				e.printStackTrace();
-			}
-			return keyPairGenerator.generateKeyPair();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-		}
-	
-		private KeyPair createRSAKeyPair()  {
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (DataLengthException e) {
+            e.printStackTrace();
+        }
 
-			KeyPairGenerator keyPairGenerator = null;
-			try {
-				keyPairGenerator = KeyPairGenerator.getInstance("RSA", "SC");
-			} catch (NoSuchAlgorithmException e) {
-				e.printStackTrace();
-			} catch (NoSuchProviderException e) {
-				e.printStackTrace();
-			}
-			keyPairGenerator.initialize(2048);
-			 return keyPairGenerator.generateKeyPair();
-		}
-		
-		static boolean isValidRSAPair(KeyPair pair)
-		{
-		  Key key = pair.getPrivate();
-		  if (key instanceof RSAPrivateCrtKey) {
-		    RSAPrivateCrtKey pvt = (RSAPrivateCrtKey) key;
-		    BigInteger e = pvt.getPublicExponent();
-		    RSAPublicKey pub = (RSAPublicKey) pair.getPublic();
-		    return e.equals(pub.getPublicExponent()) && 
-		      pvt.getModulus().equals(pub.getModulus());
-		  }
-		  else {
-		    throw new IllegalArgumentException("Not a CRT RSA key.");
-		  }
-		}
+        return keyPair;
+    }
 
-	
-		
+    public KeyPair createSecp256k1KeyPair() {
 
-		
-	}
+        KeyPairGenerator keyPairGenerator = null;
+        try {
+            keyPairGenerator = KeyPairGenerator.getInstance("ECDSA", "SC");
+
+            ECGenParameterSpec ecGenParameterSpec = new ECGenParameterSpec("secp256k1");
+            keyPairGenerator.initialize(ecGenParameterSpec, new SecureRandom());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        }
+        return keyPairGenerator.generateKeyPair();
+
+    }
+
+    private KeyPair createRSAKeyPair() {
+
+        KeyPairGenerator keyPairGenerator = null;
+        try {
+            keyPairGenerator = KeyPairGenerator.getInstance("RSA", "SC");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchProviderException e) {
+            e.printStackTrace();
+        }
+        keyPairGenerator.initialize(2048);
+        return keyPairGenerator.generateKeyPair();
+    }
+
+
+}
 

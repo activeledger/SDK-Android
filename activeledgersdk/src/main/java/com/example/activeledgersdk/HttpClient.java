@@ -15,6 +15,15 @@ public class HttpClient {
     private APIService apiService;
 
 
+    private HttpClient() {
+        final Retrofit retrofit = new Retrofit.Builder().baseUrl(Utility.getInstance().getHTTPURL())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        apiService = retrofit.create(APIService.class);
+    }
+
     public static HttpClient getInstance() {
         if (instance == null) {
             instance = new HttpClient();
@@ -22,20 +31,7 @@ public class HttpClient {
         return instance;
     }
 
-
-
-    private HttpClient(){
-        final Retrofit retrofit = new Retrofit.Builder().baseUrl(Utility.getInstance().getHTTPURL())
-                                                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                                                        .addConverterFactory(ScalarsConverterFactory.create())
-                                                        .build();
-
-        apiService = retrofit.create(APIService.class);
-    }
-
-
-
-    public Observable<String> sendTransaction(String transaction){
+    public Observable<String> sendTransaction(String transaction) {
 
         return apiService.sendTransaction(transaction);
     }

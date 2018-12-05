@@ -1,251 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
+
     <data>
+
         <variable
             name="viewmodel"
             type="com.agilitysciences.alsdk.MainActivityViewModel" />
     </data>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-=======
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:max="100"
-                android:backgroundTint="@color/colorPrimaryDark"
-                android:indeterminateTint="#1a09d6"
-                android:layout_marginTop="-7dp"/>
-
-    <ImageView
-        android:layout_alignParentTop="true"
-        android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerInParent="true"
-        android:src="@drawable/activeledgerlogo"
-        />
-
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_below="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="15dp"
-        android:text="Activeledger"
-
-        />
-
-            <LinearLayout
-                android:id="@+id/generatekeys_view"
-
-                android:layout_below="@+id/app_name"
-
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true"
-                >
+                android:layout_height="wrap_content">
 
-                <Spinner
-                    android:id="@+id/keytype_spinner"
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-7dp"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:indeterminate="true"
+                    android:indeterminateTint="#1a09d6"
+                    android:max="100" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/activeledgerlogo" />
+
+                <TextView
+                    android:id="@+id/app_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/logo"
+                    android:layout_centerInParent="true"
+                    android:text="Activeledger"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp"
+
                     />
 
-                <Button
-<<<<<<< HEAD
-                    android:id="@+id/generate_keys"
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+                <LinearLayout
+                    android:id="@+id/generatekeys_view"
+
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:text="Generate keys"
+                    android:layout_below="@+id/app_name"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
 
-<<<<<<< HEAD
-                    android:onClick="@{viewmodel::generatekeys}"/>
-=======
-                    android:onClick="generatekeys"/>
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+                    <Spinner
+                        android:id="@+id/keytype_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/generate_keys"
 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{viewmodel::generatekeys}"
 
-
-
-    <TextView
-        android:id="@+id/tv_pubkey"
-        android:layout_below="@+id/generatekeys_view"
-        android:layout_width="match_parent"
-        android:text="Public Key:"
-        android:textSize="15dp"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorPrimaryDark"
-
-        android:layout_height="wrap_content" />
-
-    <TextView
-<<<<<<< HEAD
-            android:id="@+id/pubkey"
-            android:layout_below="@+id/tv_pubkey"
-            android:layout_width="match_parent"
-            android:text = "@{viewmodel.publickey}"
-            android:layout_height="wrap_content" />
+                        android:text="Generate keys" />
+                </LinearLayout>
 
 
-=======
-        android:id="@+id/pubkey"
-        android:layout_below="@+id/tv_pubkey"
-        android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/tv_pubkey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/generatekeys_view"
+                    android:layout_centerInParent="true"
+                    android:text="Public Key:"
+                    android:textColor="@color/colorPrimaryDark"
 
-        android:layout_height="wrap_content" />
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+                    android:textSize="15dp" />
 
-    <TextView
-        android:id="@+id/tv_prikey"
-        android:layout_below="@+id/pubkey"
-        android:text="Private Key:"
-        android:textSize="15dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/pubkey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_pubkey"
+                    android:text="@{viewmodel.publickey}" />
 
-    <TextView
-        android:id="@+id/prikey"
-        android:layout_below="@+id/tv_prikey"
-        android:layout_width="match_parent"
-<<<<<<< HEAD
-        android:text = "@{viewmodel.privatekey}"
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-        android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/tv_prikey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/pubkey"
+                    android:layout_centerInParent="true"
+                    android:text="Private Key:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
-
-
-            <LinearLayout
-                android:id="@+id/onboardkeys_view"
-
-                android:layout_below="@+id/prikey"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                >
+                <TextView
+                    android:id="@+id/prikey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_prikey"
+                    android:text="@{viewmodel.privatekey}" />
 
 
-                <EditText
-                    android:id="@+id/keyname_et"
+                <LinearLayout
+                    android:id="@+id/onboardkeys_view"
+
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
-                    android:hint="Enter Key Name"
-<<<<<<< HEAD
-                    android:text="@={viewmodel.keyname}"
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+                    android:layout_below="@+id/prikey"
+                    android:layout_centerInParent="true"
+                    android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:orientation="horizontal">
 
-                    />
+
+                    <EditText
+                        android:id="@+id/keyname_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:hint="Enter Key Name"
+                        android:text="@={viewmodel.keyname}" />
 
 
-                <Button
-                    android:id="@+id/btn_onboard"
+                    <Button
+                        android:id="@+id/btn_onboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{viewmodel::onboardkeys}"
+                        android:text="onboard keys" />
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/onBoardId_tv_lbl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="onboard keys"
-<<<<<<< HEAD
-                    android:onClick="@{viewmodel::onboardkeys}"/>
-=======
-                    android:onClick="onboardkeys"/>
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
+                    android:layout_below="@+id/onboardkeys_view"
+                    android:text="Onboard ID:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/onBoardId_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/onBoardId_tv_lbl"
+                    android:text="@{viewmodel.onBoardId}" />
+
+                <TextView
+                    android:id="@+id/onBoardName_tv_lbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/onBoardId_tv"
+                    android:text="Onboard Name:"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15dp" />
 
 
+                <TextView
+                    android:id="@+id/onBoardName_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/onBoardName_tv_lbl"
+                    android:text="@{viewmodel.onBoardName}" />
 
+            </RelativeLayout>
 
-
-
-            <TextView
-                android:id="@+id/onBoardId_tv_lbl"
-                android:layout_below="@+id/onboardkeys_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Onboard ID:"/>
-
-
-            <TextView
-                android:id="@+id/onBoardId_tv"
-                android:layout_below="@+id/onBoardId_tv_lbl"
-<<<<<<< HEAD
-                android:text="@{viewmodel.onBoardId}"
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/onBoardName_tv_lbl"
-                android:layout_below="@+id/onBoardId_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="Onboard Name:"/>
-
-
-            <TextView
-                android:id="@+id/onBoardName_tv"
-                android:layout_below="@+id/onBoardName_tv_lbl"
-<<<<<<< HEAD
-                android:text="@{viewmodel.onBoardName}"
-=======
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-
-        </RelativeLayout>
-
-    </ScrollView>
-<<<<<<< HEAD
-</RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 
 </layout>
-=======
-</RelativeLayout>
->>>>>>> 07acfea02737258a82eeea44fde1fb955581c20e
