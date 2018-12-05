@@ -75,3 +75,11 @@ Observable<String> response = ActiveLedgerSDK.getInstance().onBoardKeys(KeyPair,
 Example:
 ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey");
 ```
+
+## Executing a Transaction
+
+Execute method takes a transaction and will give an Observable in return with response in String format. User RxAndroid to subscribe to the Obserable.
+
+```Java
+Observable<String>  respinse =  ActiveLedgerSDK.getInstance().executeTransaction(String transactionJson);
+```
