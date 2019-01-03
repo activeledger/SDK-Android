@@ -83,3 +83,11 @@ Execute method takes a transaction and will give an Observable in return with re
 ```Java
 Observable<String>  respinse =  ActiveLedgerSDK.getInstance().executeTransaction(String transactionJson);
 ```
+
+
+## License
+
+---
+
+This project is licensed under the [MIT](https://github.com/activeledger/SDK-Android/blob/master/LICENSE) License
+
