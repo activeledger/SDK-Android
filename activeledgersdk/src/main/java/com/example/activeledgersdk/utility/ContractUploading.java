@@ -10,6 +10,7 @@ import org.json.JSONObject;
 public class ContractUploading {
 
 
+    // this method can be used to create a transaction that uploads a contracr to the ledger
     public static JSONObject createContractUploadTransaction(KeyType keyType) {
         JSONObject transaction = new JSONObject();
 
@@ -86,6 +87,7 @@ public class ContractUploading {
         return transaction;
     }
 
+    // method creates the basic transaction object this is included in a transaction
     public static JSONObject createTXObject(String namespace, String contract, String entry, JSONObject $i, JSONObject $o, JSONObject $r) {
 
         JSONObject $tx = new JSONObject();
@@ -111,6 +113,7 @@ public class ContractUploading {
     }
 
 
+    // this method creates the basic transaction that can save time while creating transactions
     public static JSONObject createBaseTransaction(JSONObject $tx, Boolean selfsign, JSONObject $sigs) {
 
         JSONObject transaction = new JSONObject();
