@@ -7,6 +7,7 @@ import retrofit2.http.POST;
 
 public interface APIService {
 
+    // http service endpoint
     @Headers("Content-Type: application/json")
     @POST(".")
     Observable<String> sendTransaction(@Body String post);
