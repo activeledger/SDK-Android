@@ -14,7 +14,7 @@ public class HttpClient {
     private static HttpClient instance;
     private APIService apiService;
 
-
+    // this method creates and HttpClient that is further user to execute transactions
     private HttpClient() {
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(Utility.getInstance().getHTTPURL())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -31,6 +31,7 @@ public class HttpClient {
         return instance;
     }
 
+    // this method can be used to send transaction as an HTTP request to the ledger
     public Observable<String> sendTransaction(String transaction) {
 
         return apiService.sendTransaction(transaction);
