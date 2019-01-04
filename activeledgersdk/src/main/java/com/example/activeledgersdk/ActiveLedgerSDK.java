@@ -33,11 +33,13 @@ public class ActiveLedgerSDK {
         return instance;
     }
 
+    // function takes trnascation JSON object, sigs JSON object and self sign flag) and creates and return an onboard transaction
     public static JSONObject createBaseTransaction(JSONObject $tx, Boolean selfsign, JSONObject
             $sigs) {
         return ContractUploading.createBaseTransaction($tx, selfsign, $sigs);
     }
 
+    // this method can be used to sign a message using private key
     public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) {
         try {
             return OnboardIdentity.signMessage(message, keyPair, keyType);
@@ -53,14 +55,17 @@ public class ActiveLedgerSDK {
         return null;
     }
 
+    // by given a file name this function reads the file from application directory and returns content as String.
     public static String readFileAsString(String fileName) throws IOException {
         return Utility.getInstance().readFileAsString(fileName);
     }
 
+    // base method that has to be called before using SDK
     public void initSDK(Context context, String protocol, String url, String port) {
         Utility.getInstance().initSDK(context, protocol, url, port);
     }
 
+    // function generates and set the default keypair of the SDK
     public Observable<KeyPair> generateAndSetKeyPair(KeyType keyType, boolean saveKeysToFile) {
 
         KeyGenApi keyGenApi = new KeyGenApi();
@@ -68,17 +73,17 @@ public class ActiveLedgerSDK {
         return Observable.just(keyGenApi.generateKeyPair(keyType, saveKeysToFile));
     }
 
+    // creates an onboard transaction and execute the http request to the ledger
     public Observable<String> onBoardKeys(KeyPair keyPair, String keyName) {
 
         KEYNAME = keyName;
         JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType());
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
-
-
         return executeTransaction(transactionJson);
     }
 
+    // this method is used to an http request and execute a transaction over the ledger
     public Observable<String> executeTransaction(String transactionJson) {
 
         return HttpClient.getInstance().sendTransaction(transactionJson)
