@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 public class PemFile {
     private PemObject pemObject;
 
+    // create a PEM object by reading the contents of file
     public PemFile(File filename) throws IOException {
         PemReader pemReader = new PemReader(new InputStreamReader(new FileInputStream(filename)));
         try {
