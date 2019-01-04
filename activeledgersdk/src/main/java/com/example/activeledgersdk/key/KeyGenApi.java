@@ -23,7 +23,7 @@ import java.security.spec.ECGenParameterSpec;
 
 public class KeyGenApi {
 
-
+    // checks the validity of RSA keypair
     static boolean isValidRSAPair(KeyPair pair) {
         Key key = pair.getPrivate();
         if (key instanceof RSAPrivateCrtKey) {
@@ -37,6 +37,7 @@ public class KeyGenApi {
         }
     }
 
+    // generates RSC/EC keypair
     public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile) {
 
         KeyPair keyPair = null;
