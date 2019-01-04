@@ -28,6 +28,7 @@ public class OnboardIdentity {
         return instance;
     }
 
+    // use this method to sign a transaction using private key
     public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
 
         Signature sign = null;
@@ -56,6 +57,7 @@ public class OnboardIdentity {
         return s;
     }
 
+    // this method return the onboard transaction as JSON object
     public JSONObject onboard(KeyPair keyPair, KeyType type) {
 
         JSONObject transaction = new JSONObject();
