@@ -48,6 +48,7 @@ public class Utility {
         return instance;
     }
 
+    // function writes the keys in PEM format to a text file
     public static void writePem(String filename, String description, Key key) throws FileNotFoundException, IOException {
         Log.e("File Writing", "");
         String filePath = Utility.getInstance().getFilePath(filename);
@@ -64,6 +65,7 @@ public class Utility {
 
     }
 
+    // function reads the keys as a string from a text file
     public static String readFileAsString(String fileName) throws IOException {
         Log.e("File Reading", "");
         String filePath = Utility.getInstance().getFilePath(fileName);
@@ -81,6 +83,7 @@ public class Utility {
         return fileAsString;
     }
 
+    // function generates the private keys from a text file
     public static PrivateKey generatePrivateKeyFromFile(String filename, KeyType type) throws InvalidKeySpecException, IOException, NoSuchProviderException, NoSuchAlgorithmException {
 
         KeyFactory factory = null;
@@ -102,6 +105,7 @@ public class Utility {
 
     }
 
+    // function generates the public keys from a text file
     public static PublicKey generatePublicKeyFromFile(String filename, KeyType type) throws InvalidKeySpecException, IOException, NoSuchProviderException, NoSuchAlgorithmException {
 
         KeyFactory factory = null;
@@ -129,13 +133,11 @@ public class Utility {
         this.context = context;
     }
 
+    // this function initialises the sdk and should be called before using SDK
     public void initSDK(Context context, String protocol, String url, String port) {
 
         setContext(context);
-
         PreferenceManager.getInstance().init();
-
-
         PreferenceManager.getInstance().saveString(context.getString(R.string.protocol), protocol);
         PreferenceManager.getInstance().saveString(context.getString(R.string.ip), url);
         PreferenceManager.getInstance().saveString(context.getString(R.string.port), port);
@@ -143,6 +145,7 @@ public class Utility {
 
     }
 
+    // returns the ledger node endpoint
     public String getHTTPURL() {
 
         return PreferenceManager.getInstance().getStringValueFromKey(context.getString(R.string.protocol)) + "://" +
@@ -156,10 +159,12 @@ public class Utility {
         return "PemFile [pemObject=" + pemObject + "]";
     }
 
+    // returns the file path where the keys are stored
     public String getFilePath(String filename) {
         return getContext().getFilesDir().getPath().toString() + "/" + filename;
     }
 
+    // extracts the private key from Application preference
     public PrivateKey getPrivateKeyFromPreference() {
         String privKeyStr = PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.private_key));
         byte[] sigBytes = Base64.decode(privKeyStr);
@@ -176,13 +181,14 @@ public class Utility {
             PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(sigBytes);
             return keyFact.generatePrivate(privKeySpec);
 
-//			return  keyFact.generatePrivate(x509KeySpec);
+			return  keyFact.generatePrivate(x509KeySpec);
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    // extracts the public key from Application preference
     public PublicKey getPublicKeyFromPreference() {
         String pubKeyStr = PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.public_key));
         byte[] sigBytes = Base64.decode(pubKeyStr);
@@ -222,7 +228,7 @@ public class Utility {
         return jsonObject.toString().replace("\\/", "/");
     }
 
-
+    // extract the onboard key if and name from response
     public void extractID(String response) throws JSONException {
         JSONObject Jobject = new JSONObject(response);
         String name = Jobject.optString("$streams");
