@@ -59,5 +59,10 @@ public class HttpClient {
         return apiService.sendTransaction(transaction);
     }
 
+    // does an HTTP hit and return territoriality details
+    public Observable<String> getTerritorialityStatus(){
+        return apiService.getTerritorialityStatus();
+    }
+
 
 }

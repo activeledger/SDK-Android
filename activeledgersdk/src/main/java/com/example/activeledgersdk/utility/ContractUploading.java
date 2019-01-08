@@ -136,12 +136,15 @@ public class ContractUploading {
 
 
     // this method creates the basic transaction that can save time while creating transactions
-    public static JSONObject createBaseTransaction(JSONObject $tx, Boolean selfsign, JSONObject $sigs) {
+    public static JSONObject createBaseTransaction(String territorialityReference, JSONObject $tx, Boolean selfsign, JSONObject $sigs) {
 
         JSONObject transaction = new JSONObject();
 
 
         try {
+            if(territorialityReference!=null)
+                transaction.put("$territoriality",territorialityReference);
+
             transaction.put("$tx", $tx);
 
             if (selfsign != null)

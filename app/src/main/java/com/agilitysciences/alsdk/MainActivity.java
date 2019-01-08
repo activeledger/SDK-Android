@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 showToast(message);
             }
         });
-        setContentView(R.layout.activity_main);
 
         progressBar = (ProgressBar) findViewById(R.id.progressbar);
 
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         initLayout();
+
 
 
     }

@@ -203,7 +203,7 @@ public class Utility {
             PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(sigBytes);
             return keyFact.generatePrivate(privKeySpec);
 
-			return  keyFact.generatePrivate(x509KeySpec);
+//			return  keyFact.generatePrivate(x509KeySpec);
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }

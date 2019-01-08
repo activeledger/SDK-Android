@@ -198,4 +198,29 @@ public class MainActivityViewModel extends ViewModel {
         this.showToast.postValue(message);
     }
 
+    public void getTerritorialityList(){
+        ActiveLedgerSDK.getInstance().getTerritorialityStatus()
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String response) {
+                        Log.e("terrioriality --->", response);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
 }
