@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.activeledgersdk.ActiveLedgerSDK;
+import com.example.activeledgersdk.Territoriality;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
@@ -35,7 +36,7 @@ public class MainActivityViewModel extends ViewModel {
 
 
     public void onboardkeys(View view) {
-
+getTerritorialityList();
 
         if (key_Pair != null) {
 
@@ -200,15 +201,16 @@ public class MainActivityViewModel extends ViewModel {
 
     public void getTerritorialityList(){
         ActiveLedgerSDK.getInstance().getTerritorialityStatus()
-                .subscribe(new Observer<String>() {
+                .subscribe(new Observer<Territoriality>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(String response) {
-                        Log.e("terrioriality --->", response);
+                    public void onNext(Territoriality response) {
+                        //Territoriality object has a list of neighbours and reference to left and right node
+                        Log.e("terrioriality --->", response.getStatus());
 
                     }
 

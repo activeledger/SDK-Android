@@ -23,6 +23,7 @@
 package com.example.activeledgersdk;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
@@ -38,9 +39,13 @@ import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SignatureException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class ActiveLedgerSDK {
@@ -116,9 +121,34 @@ public class ActiveLedgerSDK {
     }
 
     // does an HTTP hit and return territoriality details
-    public Observable<String> getTerritorialityStatus() {
+    public Observable<Territoriality> getTerritorialityStatus() {
 
         return HttpClient.getInstance().getTerritorialityStatus()
+                .flatMap(new Function<String, Observable<Territoriality>>() {
+                    @Override
+                    public Observable<Territoriality> apply(String s) throws Exception {
+                        JSONObject jsonObject = new JSONObject(s);
+
+
+                        Territoriality territorialityObj = new Territoriality();
+                        territorialityObj.setStatus(jsonObject.getString("status"));
+                        territorialityObj.setReference(jsonObject.getString("reference"));
+                        territorialityObj.setLeft(jsonObject.getString("left"));
+                        territorialityObj.setRight(jsonObject.getString("right"));
+                        territorialityObj.setPem(jsonObject.getString("pem"));
+
+                        Iterator<String> keys = jsonObject.getJSONObject("neighbourhood").getJSONObject("neighbours").keys();
+
+
+                        List<String> neighbours = new ArrayList<>();
+                        while(keys.hasNext()){
+                            neighbours.add(keys.next());
+                        }
+                        territorialityObj.setNeighbours(neighbours);
+
+                        return Observable.just(territorialityObj);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
 

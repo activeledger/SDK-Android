@@ -25,6 +25,7 @@ package com.example.activeledgersdk.utility;
 import android.util.Log;
 
 import com.example.activeledgersdk.R;
+import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -159,6 +160,6 @@ public class ContractUploading {
 
 
         return transaction;
-    }
+      }
 
 }
