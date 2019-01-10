@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.example.activeledgersdk;
+package com.example.activeledgersdk.model;
 
 import java.util.List;
 

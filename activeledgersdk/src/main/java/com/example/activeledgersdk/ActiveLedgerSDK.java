@@ -23,9 +23,9 @@
 package com.example.activeledgersdk;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.activeledgersdk.key.KeyGenApi;
+import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
 import com.example.activeledgersdk.utility.ContractUploading;
 import com.example.activeledgersdk.utility.KeyType;

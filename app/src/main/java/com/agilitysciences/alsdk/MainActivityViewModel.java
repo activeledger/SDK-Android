@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.activeledgersdk.ActiveLedgerSDK;
-import com.example.activeledgersdk.Territoriality;
+import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
