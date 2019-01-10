@@ -36,7 +36,6 @@ public class MainActivityViewModel extends ViewModel {
 
 
     public void onboardkeys(View view) {
-getTerritorialityList();
 
         if (key_Pair != null) {
 
