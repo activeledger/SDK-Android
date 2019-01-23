@@ -12,6 +12,7 @@ import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.KeyPair;
@@ -35,46 +36,7 @@ public class MainActivityViewModel extends ViewModel {
     private MutableLiveData<String> showToast = new MutableLiveData<>();
 
 
-    public void onboardkeys(View view) {
-getTerritorialityList();
 
-        if (key_Pair != null) {
-
-            ActiveLedgerSDK.getInstance().onBoardKeys(key_Pair, keyname)
-                    .subscribe(new Observer<String>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onNext(String response) {
-                            try {
-                                Utility.getInstance().extractID(response);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            Log.e("----->", response);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                            setOnBoardId(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_id)));
-                            setOnBoardName(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_name)));
-                        }
-                    });
-
-        } else {
-            setShowToast("Generate Keys First");
-        }
-
-    }
 
 
     public void generatekeys(View view) {
@@ -110,6 +72,48 @@ getTerritorialityList();
                         setKey_Pair(keyPair);
                     }
                 });
+    }
+
+
+    public void onboardkeys(View view) {
+
+        if (key_Pair != null) {
+
+            ActiveLedgerSDK.getInstance().onBoardKeys(key_Pair, keyname)
+                    .subscribe(new Observer<String>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onNext(String response) {
+                            try {
+                                Utility.getInstance().extractID(response);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            Log.e("----->", response);
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                            setOnBoardId(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_id)));
+                            setOnBoardName(PreferenceManager.getInstance().getStringValueFromKey(Utility.getInstance().getContext().getString(R.string.onboard_name)));
+                        }
+                    });
+
+        } else {
+            setShowToast("Generate Keys First");
+        }
+
     }
 
 
@@ -210,7 +214,7 @@ getTerritorialityList();
                     @Override
                     public void onNext(Territoriality response) {
                         //Territoriality object has a list of neighbours and reference to left and right node
-                        Log.e("terrioriality --->", response.getStatus());
+                        Log.e("Territoriality --->", response.getStatus());
 
                     }
 
