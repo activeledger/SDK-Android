@@ -29,6 +29,7 @@ public class Transactions {
 
         return $tx;
     }
+    
 
     public static JSONObject registerNamespaceTransaction(String namespace, String identityStream) {
 
