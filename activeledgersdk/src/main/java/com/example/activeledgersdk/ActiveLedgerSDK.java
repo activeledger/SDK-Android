@@ -174,7 +174,7 @@ public class ActiveLedgerSDK {
     }
 
 
-    //method used to retrieve the transaction data
+    //method used to retrieve the transaction data using id
     public Observable<String> getTransactionData(String id){
         return HttpClient.getInstance().getTransactionData(id)
                 .subscribeOn(Schedulers.io())
