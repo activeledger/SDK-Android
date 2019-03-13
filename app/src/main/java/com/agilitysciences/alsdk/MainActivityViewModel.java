@@ -229,4 +229,30 @@ public class MainActivityViewModel extends ViewModel {
                 });
     }
 
+    public void getTransactionData(String id){
+        ActiveLedgerSDK.getInstance().getTransactionData(id)
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(String response) {
+                        //Territoriality object has a list of neighbours and reference to left and right node
+                        Log.e("transaction data --->", response);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
 }

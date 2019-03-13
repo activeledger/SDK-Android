@@ -65,4 +65,7 @@ public class HttpClient {
     }
 
 
+    public Observable<String> getTransactionData(String id){
+        return apiService.getTransactionData(id);
+    }
 }

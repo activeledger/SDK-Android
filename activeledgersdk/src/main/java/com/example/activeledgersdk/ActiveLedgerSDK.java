@@ -53,6 +53,8 @@ public class ActiveLedgerSDK {
     public static KeyType keyType;
     public static String KEYNAME = "AwesomeKey";
     private static ActiveLedgerSDK instance = null;
+    private KeyPair keyPair;
+
 
     public static synchronized ActiveLedgerSDK getInstance() {
         if (instance == null)
@@ -163,5 +165,20 @@ public class ActiveLedgerSDK {
         this.keyType = keyType;
     }
 
+    public KeyPair getKeyPair() {
+        return keyPair;
+    }
+
+    public void setKeyPair(KeyPair keyPair) {
+        this.keyPair = keyPair;
+    }
+
+
+    //method used to retrieve the transaction data
+    public Observable<String> getTransactionData(String id){
+        return HttpClient.getInstance().getTransactionData(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
 }
