@@ -23,6 +23,7 @@
 package com.example.activeledgersdk;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.model.Territoriality;
@@ -109,6 +110,8 @@ public class ActiveLedgerSDK {
         JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType());
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
+
+        Log.e("Onboard Transaction", transactionJson);
         return executeTransaction(transactionJson);
     }
 
