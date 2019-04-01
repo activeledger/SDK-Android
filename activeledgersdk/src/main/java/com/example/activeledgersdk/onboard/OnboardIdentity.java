@@ -38,6 +38,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Signature;
 import java.security.SignatureException;
+import java.security.spec.InvalidKeySpecException;
 
 public class OnboardIdentity {
 
@@ -65,8 +66,15 @@ public class OnboardIdentity {
 
         }
 
+        try {
+            sign.initSign(Utility.generatePrivateKeyFromFile(Utility.PRIVATEKEY_FILE,type));
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 //		  sign.initSign(Utility.generatePrivateKeyFromFile(factory,Utility.PRIVATEKEY_FILE));
-        sign.initSign(keyPair.getPrivate());
+//        sign.initSign(keyPair.getPrivate());
 
         sign.update(message);
         byte[] signature = sign.sign();
@@ -95,7 +103,7 @@ public class OnboardIdentity {
                 pubKey = Utility.readFileAsString(Utility.PUBLICKEY_FILE);
                 System.out.println("public:::" + pubKey.toString());
                 String priKey = Utility.readFileAsString(Utility.PRIVATEKEY_FILE);
-                System.out.println("public:::" + priKey.toString());
+                System.out.println("private:::" + priKey.toString());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -103,12 +111,14 @@ public class OnboardIdentity {
 
             $tx.put("$contract", "onboard");
             $tx.put("$namespace", "default");
+
             identity.put("publicKey", pubKey);
 
             if (type == KeyType.RSA)
                 identity.put("type", "rsa");
             else if (type == KeyType.EC)
                 identity.put("type", "secp256k1");
+
             $i.put(ActiveLedgerSDK.KEYNAME, identity);
             $tx.put("$i", $i);
 

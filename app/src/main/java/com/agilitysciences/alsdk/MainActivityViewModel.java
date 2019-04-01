@@ -35,10 +35,6 @@ public class MainActivityViewModel extends ViewModel {
     private MutableLiveData<String> onBoardName;
     private MutableLiveData<String> showToast = new MutableLiveData<>();
 
-
-
-
-
     public void generatekeys(View view) {
 
         ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType, true)
