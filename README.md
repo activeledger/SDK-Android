@@ -42,7 +42,7 @@ Add the dependency
 </dependency>
 ```
 
-### NOTE: Please update the Tag : 0.1.2
+### NOTE: Please update the Tag : 0.1.3
 
 ## SDK Dev Instruction
 
