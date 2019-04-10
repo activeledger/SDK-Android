@@ -63,13 +63,20 @@ public class Utility {
     private static PemObject pemObject;
 
     public static String getPrivateKeyFileName(String identifier){
+        identifier = removePeriodFromIdentifier(identifier);
         String PRIVATEKEY_FILE = identifier +"-priv-key.pem";
         return PRIVATEKEY_FILE;
     }
 
     public static String getPublicKeyFileName(String identifier){
+        identifier = removePeriodFromIdentifier(identifier);
         String PUBLICKEY_FILE = identifier +"-pub-key.pem";
         return PUBLICKEY_FILE;
+    }
+
+    public static String removePeriodFromIdentifier(String identifier)
+    {
+        return identifier.replace(".","");
     }
 
     public static synchronized Utility getInstance() {
