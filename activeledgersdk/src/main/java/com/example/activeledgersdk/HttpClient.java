@@ -60,12 +60,12 @@ public class HttpClient {
     }
 
     // does an HTTP hit and return territoriality details
-    public Observable<String> getTerritorialityStatus(){
+    public Observable<String> getTerritorialityStatus() {
         return apiService.getTerritorialityStatus();
     }
 
 
-    public Observable<String> getTransactionData(String id){
+    public Observable<String> getTransactionData(String id) {
         return apiService.getTransactionData(id);
     }
 }

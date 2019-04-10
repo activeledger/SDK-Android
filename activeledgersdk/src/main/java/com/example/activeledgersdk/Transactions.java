@@ -31,7 +31,7 @@ public class Transactions {
     }
 
 
-    public static JSONObject registerNamespaceTransaction(String namespace, String identityStream) {
+    public static JSONObject registerNamespaceTransaction(String namespace, String identityStream,String identifier) {
 
         JSONObject transaction = new JSONObject();
 
@@ -42,7 +42,7 @@ public class Transactions {
 
             JSONObject $sigs = new JSONObject();
             String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
-            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(),ActiveLedgerSDK.getInstance().getKeyPair(),ActiveLedgerSDK.getInstance().getKeyType());
+            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(), ActiveLedgerSDK.getInstance().getKeyPair(), ActiveLedgerSDK.getInstance().getKeyType(), identifier);
             $sigs.put(identityStream, signature);
             transaction.put("$sigs", $sigs);
 
@@ -56,7 +56,7 @@ public class Transactions {
     }
 
 
-    public static JSONObject smartContractDeploymentTransactionObject(String version, String namespace, String name,String base64TSContract,String identityStream){
+    public static JSONObject smartContractDeploymentTransactionObject(String version, String namespace, String name, String base64TSContract, String identityStream) {
 
         JSONObject $tx = new JSONObject();
         JSONObject $i = new JSONObject();
@@ -81,18 +81,18 @@ public class Transactions {
     }
 
 
-    public static JSONObject smartContractDeploymentTransaction(String version, String namespace, String name,String base64TSContract, String identityStream){
+    public static JSONObject smartContractDeploymentTransaction(String version, String namespace, String name, String base64TSContract, String identityStream, String identifier) {
 
         JSONObject transaction = new JSONObject();
 
-        JSONObject $tx = smartContractDeploymentTransactionObject(version,namespace,name,base64TSContract, identityStream);
+        JSONObject $tx = smartContractDeploymentTransactionObject(version, namespace, name, base64TSContract, identityStream);
         try {
 
             transaction.put("$tx", $tx);
 
             JSONObject $sigs = new JSONObject();
             String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
-            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(),ActiveLedgerSDK.getInstance().getKeyPair(),ActiveLedgerSDK.getInstance().getKeyType());
+            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(), ActiveLedgerSDK.getInstance().getKeyPair(), ActiveLedgerSDK.getInstance().getKeyType(),identifier);
             $sigs.put(identityStream, signature);
             transaction.put("$sigs", $sigs);
 

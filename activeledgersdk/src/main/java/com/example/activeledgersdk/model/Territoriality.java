@@ -25,6 +25,13 @@ package com.example.activeledgersdk.model;
 import java.util.List;
 
 public class Territoriality {
+    private String status;
+    private String reference;
+    private String left;
+    private String right;
+    private String pem;
+    private List<String> neighbours;
+
     public String getStatus() {
         return status;
     }
@@ -72,12 +79,5 @@ public class Territoriality {
     public void setNeighbours(List<String> neighbours) {
         this.neighbours = neighbours;
     }
-
-    private String status;
-    private String reference;
-    private String left;
-    private String right;
-    private String pem;
-    private List<String> neighbours;
 
 }

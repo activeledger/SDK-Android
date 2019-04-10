@@ -66,13 +66,13 @@ public class ActiveLedgerSDK {
     // function takes trnascation JSON object, sigs JSON object and self sign flag) and creates and return an onboard transaction
     public static JSONObject createBaseTransaction(JSONObject $tx, Boolean selfsign, JSONObject
             $sigs) {
-        return ContractUploading.createBaseTransaction(null,$tx, selfsign, $sigs);
+        return ContractUploading.createBaseTransaction(null, $tx, selfsign, $sigs);
     }
 
     // this method can be used to sign a message using private key
-    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) {
+    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type,String identifier) {
         try {
-            return OnboardIdentity.signMessage(message, keyPair, keyType);
+            return OnboardIdentity.signMessage(message, keyPair, keyType, identifier);
         } catch (InvalidKeyException e) {
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
@@ -96,18 +96,18 @@ public class ActiveLedgerSDK {
     }
 
     // function generates and set the default keypair of the SDK
-    public Observable<KeyPair> generateAndSetKeyPair(KeyType keyType, boolean saveKeysToFile) {
+    public Observable<KeyPair> generateAndSetKeyPair(KeyType keyType, boolean saveKeysToFile, String identifier) {
 
         KeyGenApi keyGenApi = new KeyGenApi();
         setKeyType(keyType);
-        return Observable.just(keyGenApi.generateKeyPair(keyType, saveKeysToFile));
+        return Observable.just(keyGenApi.generateKeyPair(keyType, saveKeysToFile,identifier));
     }
 
     // creates an onboard transaction and execute the http request to the ledger
-    public Observable<String> onBoardKeys(KeyPair keyPair, String keyName) {
+    public Observable<String> onBoardKeys(KeyPair keyPair, String keyName, String identifier) {
 
         KEYNAME = keyName;
-        JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType());
+        JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType(),identifier);
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
 
@@ -146,7 +146,7 @@ public class ActiveLedgerSDK {
 
 
                         List<String> neighbours = new ArrayList<>();
-                        while(keys.hasNext()){
+                        while (keys.hasNext()) {
                             neighbours.add(keys.next());
                         }
                         territorialityObj.setNeighbours(neighbours);
@@ -178,7 +178,7 @@ public class ActiveLedgerSDK {
 
 
     //method used to retrieve the transaction data using id
-    public Observable<String> getTransactionData(String id){
+    public Observable<String> getTransactionData(String id) {
         return HttpClient.getInstance().getTransactionData(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

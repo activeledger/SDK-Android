@@ -57,11 +57,20 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class Utility {
 
-    public static String PRIVATEKEY_FILE = "priv-key.pem";
-    public static String PUBLICKEY_FILE = "pub-key.pem";
+//    public static String PUBLICKEY_FILE = "pub-key.pem";
     static Context context;
     private static Utility instance = null;
     private static PemObject pemObject;
+
+    public static String getPrivateKeyFileName(String identifier){
+        String PRIVATEKEY_FILE = identifier +"-priv-key.pem";
+        return PRIVATEKEY_FILE;
+    }
+
+    public static String getPublicKeyFileName(String identifier){
+        String PUBLICKEY_FILE = identifier +"-pub-key.pem";
+        return PUBLICKEY_FILE;
+    }
 
     public static synchronized Utility getInstance() {
         if (instance == null) {
@@ -163,7 +172,6 @@ public class Utility {
         PreferenceManager.getInstance().saveString(context.getString(R.string.protocol), protocol);
         PreferenceManager.getInstance().saveString(context.getString(R.string.ip), url);
         PreferenceManager.getInstance().saveString(context.getString(R.string.port), port);
-
 
     }
 

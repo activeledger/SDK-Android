@@ -52,7 +52,7 @@ public class OnboardIdentity {
     }
 
     // use this method to sign a transaction using private key
-    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
+    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type,String identifier) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
 
         Signature sign = null;
         KeyFactory factory = null;
@@ -67,7 +67,7 @@ public class OnboardIdentity {
         }
 
         try {
-            sign.initSign(Utility.generatePrivateKeyFromFile(Utility.PRIVATEKEY_FILE,type));
+            sign.initSign(Utility.generatePrivateKeyFromFile(Utility.getPrivateKeyFileName(identifier), type));
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -88,7 +88,7 @@ public class OnboardIdentity {
     }
 
     // this method return the onboard transaction as JSON object
-    public JSONObject onboard(KeyPair keyPair, KeyType type) {
+    public JSONObject onboard(KeyPair keyPair, KeyType type,String identifier) {
 
         JSONObject transaction = new JSONObject();
         JSONObject $sigs = new JSONObject();
@@ -100,9 +100,9 @@ public class OnboardIdentity {
 
             String pubKey = null;
             try {
-                pubKey = Utility.readFileAsString(Utility.PUBLICKEY_FILE);
+                pubKey = Utility.readFileAsString(Utility.getPublicKeyFileName(identifier));
                 System.out.println("public:::" + pubKey.toString());
-                String priKey = Utility.readFileAsString(Utility.PRIVATEKEY_FILE);
+                String priKey = Utility.readFileAsString(Utility.getPrivateKeyFileName(identifier));
                 System.out.println("private:::" + priKey.toString());
             } catch (IOException e) {
                 e.printStackTrace();
@@ -126,7 +126,7 @@ public class OnboardIdentity {
             try {
 
                 String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
-                $sigs.put(ActiveLedgerSDK.KEYNAME, signMessage(signTransactionObject.getBytes(), keyPair, type));
+                $sigs.put(ActiveLedgerSDK.KEYNAME, signMessage(signTransactionObject.getBytes(), keyPair, type, identifier));
 
             } catch (Exception e) {
                 throw new IllegalArgumentException("Unable to sign object:" + e.getMessage());

@@ -37,7 +37,7 @@ public class MainActivityViewModel extends ViewModel {
 
     public void generatekeys(View view) {
 
-        ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType, true)
+        ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType, true,"")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<KeyPair>() {
@@ -56,8 +56,8 @@ public class MainActivityViewModel extends ViewModel {
                         Log.d("MainActivity", "onComplete");
 
                         try {
-                            setPublickey(ActiveLedgerSDK.readFileAsString((Utility.PUBLICKEY_FILE)));
-                            setPrivatekey(ActiveLedgerSDK.readFileAsString((Utility.PRIVATEKEY_FILE)));
+                            setPublickey(ActiveLedgerSDK.readFileAsString((Utility.getPublicKeyFileName(""))));
+                            setPrivatekey(ActiveLedgerSDK.readFileAsString((Utility.getPrivateKeyFileName(""))));
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -75,7 +75,7 @@ public class MainActivityViewModel extends ViewModel {
 
         if (key_Pair != null) {
 
-            ActiveLedgerSDK.getInstance().onBoardKeys(key_Pair, keyname)
+            ActiveLedgerSDK.getInstance().onBoardKeys(key_Pair, keyname, "")
                     .subscribe(new Observer<String>() {
                         @Override
                         public void onSubscribe(Disposable d) {

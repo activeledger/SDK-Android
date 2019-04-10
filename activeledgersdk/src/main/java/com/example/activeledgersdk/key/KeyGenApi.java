@@ -60,7 +60,7 @@ public class KeyGenApi {
     }
 
     // generates RSC/EC keypair
-    public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile) {
+    public KeyPair generateKeyPair(KeyType keyType, boolean saveKeysToFile, String identifier) {
 
         KeyPair keyPair = null;
         try {
@@ -83,11 +83,11 @@ public class KeyGenApi {
 
 
             try {
-                Utility.writePem(Utility.PUBLICKEY_FILE, "PUBLIC KEY", pub);
+                Utility.writePem(Utility.getPublicKeyFileName(identifier), "PUBLIC KEY", pub);
 
                 if (saveKeysToFile) {
 
-                    Utility.writePem(Utility.PRIVATEKEY_FILE, "PRIVATE KEY", priv);
+                    Utility.writePem(Utility.getPrivateKeyFileName(identifier), "PRIVATE KEY", priv);
 
                 }
 
