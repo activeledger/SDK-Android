@@ -20,12 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.example.activeledgersdk;
+package com.example.activeledgersdk.API;
 
-import com.example.activeledgersdk.API.APIService;
+import com.example.activeledgersdk.event.ServerEventListener;
 import com.example.activeledgersdk.utility.Utility;
+import com.here.oksse.OkSse;
+import com.here.oksse.ServerSentEvent;
+
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
@@ -35,12 +41,18 @@ public class HttpClient {
 
     private static HttpClient instance;
     private APIService apiService;
+    private OkHttpClient okHttpClient;
+    private OkSse oksse;
 
     // this method creates and HttpClient that is further user to execute transactions
     private HttpClient() {
+        okHttpClient = provideOkhttpClient();
+        oksse = new OkSse(okHttpClient);
+
         final Retrofit retrofit = new Retrofit.Builder().baseUrl(Utility.getInstance().getHTTPURL())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .client(okHttpClient)
                 .build();
 
         apiService = retrofit.create(APIService.class);
@@ -51,6 +63,14 @@ public class HttpClient {
             instance = new HttpClient();
         }
         return instance;
+    }
+
+    private OkHttpClient provideOkhttpClient() {
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        httpClient.writeTimeout(60, TimeUnit.MINUTES);
+        httpClient.connectTimeout(60, TimeUnit.MINUTES);
+        httpClient.readTimeout(60, TimeUnit.MINUTES);
+        return httpClient.build();
     }
 
     // this method can be used to send transaction as an HTTP request to the ledger
@@ -68,4 +88,10 @@ public class HttpClient {
     public Observable<String> getTransactionData(String id) {
         return apiService.getTransactionData(id);
     }
+
+    public ServerSentEvent subscribeToEvent(String url, ServerEventListener listener) {
+        Request request = new Request.Builder().url(url).build();
+        return oksse.newServerSentEvent(request, listener);
+    }
+
 }

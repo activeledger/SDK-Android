@@ -2,9 +2,10 @@ package com.agilitysciences.alsdk;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.agilitysciences.alsdk.databinding.ActivityMainBinding;
 import com.example.activeledgersdk.ActiveLedgerSDK;
+import com.example.activeledgersdk.event.Event;
 import com.example.activeledgersdk.utility.KeyType;
 
 
@@ -54,16 +56,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         progressBar.setVisibility(View.INVISIBLE);
 
-
         initLayout();
 
-
+        //SSE Event
+        mainActivityViewModel.subscribeToEvent("http","testnet-uk.activeledger.io", "5261",null,null,null);
+        mainActivityViewModel.eventLiveData.observe(this, new android.arch.lifecycle.Observer<Event>() {
+            @Override
+            public void onChanged(@Nullable Event event) {
+                Log.d("SSE", "event -->" + event.getMessage());
+            }
+        });
 
     }
 
 
     public void initLayout() {
-
 
         spinner = (Spinner) findViewById(R.id.keytype_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -96,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             mainActivityViewModel.setKeyType(KeyType.RSA);
         } else {
             mainActivityViewModel.setKeyType(KeyType.EC);
-
         }
 
     }

@@ -6,13 +6,14 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.activeledgersdk.ActiveLedgerSDK;
+import com.example.activeledgersdk.event.Event;
+import com.example.activeledgersdk.event.SSEUtil;
 import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.security.KeyPair;
@@ -25,6 +26,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivityViewModel extends ViewModel {
 
 
+    public MutableLiveData<Event> eventLiveData = SSEUtil.getInstance().eventLiveData;
     private Disposable disposable;
     private KeyPair key_Pair = null;
     private KeyType keyType = KeyType.RSA;
@@ -37,7 +39,7 @@ public class MainActivityViewModel extends ViewModel {
 
     public void generatekeys(View view) {
 
-        ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType, true,"")
+        ActiveLedgerSDK.getInstance().generateAndSetKeyPair(keyType, true, "")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<KeyPair>() {
@@ -132,6 +134,7 @@ public class MainActivityViewModel extends ViewModel {
     public void activityOnDestroy() {
         if (disposable != null && !disposable.isDisposed())
             disposable.dispose();
+        ActiveLedgerSDK.getInstance().tearDown();
     }
 
 
@@ -199,7 +202,7 @@ public class MainActivityViewModel extends ViewModel {
         this.showToast.postValue(message);
     }
 
-    public void getTerritorialityList(){
+    public void getTerritorialityList() {
         ActiveLedgerSDK.getInstance().getTerritorialityStatus()
                 .subscribe(new Observer<Territoriality>() {
                     @Override
@@ -225,7 +228,7 @@ public class MainActivityViewModel extends ViewModel {
                 });
     }
 
-    public void getTransactionData(String id){
+    public void getTransactionData(String id) {
         ActiveLedgerSDK.getInstance().getTransactionData(id)
                 .subscribe(new Observer<String>() {
                     @Override
@@ -249,6 +252,10 @@ public class MainActivityViewModel extends ViewModel {
                     public void onComplete() {
                     }
                 });
+    }
+
+    public void subscribeToEvent(String protocol, String ip, String port, String stream, String contract, String event ) {
+        ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip,port,stream,contract,event, null);
     }
 
 }

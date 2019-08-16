@@ -57,26 +57,25 @@ import java.security.spec.X509EncodedKeySpec;
 
 public class Utility {
 
-//    public static String PUBLICKEY_FILE = "pub-key.pem";
+    //    public static String PUBLICKEY_FILE = "pub-key.pem";
     static Context context;
     private static Utility instance = null;
     private static PemObject pemObject;
 
-    public static String getPrivateKeyFileName(String identifier){
+    public static String getPrivateKeyFileName(String identifier) {
         identifier = removePeriodFromIdentifier(identifier);
-        String PRIVATEKEY_FILE = identifier +"-priv-key.pem";
+        String PRIVATEKEY_FILE = identifier + "-priv-key.pem";
         return PRIVATEKEY_FILE;
     }
 
-    public static String getPublicKeyFileName(String identifier){
+    public static String getPublicKeyFileName(String identifier) {
         identifier = removePeriodFromIdentifier(identifier);
-        String PUBLICKEY_FILE = identifier +"-pub-key.pem";
+        String PUBLICKEY_FILE = identifier + "-pub-key.pem";
         return PUBLICKEY_FILE;
     }
 
-    public static String removePeriodFromIdentifier(String identifier)
-    {
-        return identifier.replace(".","");
+    public static String removePeriodFromIdentifier(String identifier) {
+        return identifier.replace(".", "");
     }
 
     public static synchronized Utility getInstance() {

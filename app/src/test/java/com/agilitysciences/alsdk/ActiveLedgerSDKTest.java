@@ -1,13 +1,6 @@
 package com.agilitysciences.alsdk;
 
-import com.example.activeledgersdk.ActiveLedgerSDK;
-import com.example.activeledgersdk.utility.PreferenceManager;
-import com.example.activeledgersdk.utility.Utility;
-
-import org.junit.Assert;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
 
 public class ActiveLedgerSDKTest {
 

@@ -25,12 +25,16 @@ package com.example.activeledgersdk;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.activeledgersdk.API.HttpClient;
+import com.example.activeledgersdk.event.SSEUtil;
+import com.example.activeledgersdk.event.ServerEventListener;
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
 import com.example.activeledgersdk.utility.ContractUploading;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.Utility;
+import com.here.oksse.ServerSentEvent;
 
 import org.json.JSONObject;
 
@@ -70,7 +74,7 @@ public class ActiveLedgerSDK {
     }
 
     // this method can be used to sign a message using private key
-    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type,String identifier) {
+    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type, String identifier) {
         try {
             return OnboardIdentity.signMessage(message, keyPair, keyType, identifier);
         } catch (InvalidKeyException e) {
@@ -100,14 +104,14 @@ public class ActiveLedgerSDK {
 
         KeyGenApi keyGenApi = new KeyGenApi();
         setKeyType(keyType);
-        return Observable.just(keyGenApi.generateKeyPair(keyType, saveKeysToFile,identifier));
+        return Observable.just(keyGenApi.generateKeyPair(keyType, saveKeysToFile, identifier));
     }
 
     // creates an onboard transaction and execute the http request to the ledger
     public Observable<String> onBoardKeys(KeyPair keyPair, String keyName, String identifier) {
 
         KEYNAME = keyName;
-        JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType(),identifier);
+        JSONObject transaction = OnboardIdentity.getInstance().onboard(keyPair, getKeyType(), identifier);
 
         String transactionJson = Utility.getInstance().convertJSONObjectToString(transaction);
 
@@ -176,12 +180,19 @@ public class ActiveLedgerSDK {
         this.keyPair = keyPair;
     }
 
-
     //method used to retrieve the transaction data using id
     public Observable<String> getTransactionData(String id) {
         return HttpClient.getInstance().getTransactionData(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public void subscribeToEvent(String protocol, String ip, String port, String stream, String contract, String event, ServerEventListener listener) {
+        SSEUtil.getInstance().subscribeToEvent(protocol,ip,port,stream,contract,event, listener);
+    }
+
+    public void tearDown() {
+        SSEUtil.getInstance().closeEvents();
     }
 
 }

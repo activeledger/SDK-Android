@@ -52,7 +52,7 @@ public class OnboardIdentity {
     }
 
     // use this method to sign a transaction using private key
-    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type,String identifier) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
+    public static String signMessage(byte[] message, KeyPair keyPair, KeyType type, String identifier) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchProviderException, SignatureException {
 
         Signature sign = null;
         KeyFactory factory = null;
@@ -88,7 +88,7 @@ public class OnboardIdentity {
     }
 
     // this method return the onboard transaction as JSON object
-    public JSONObject onboard(KeyPair keyPair, KeyType type,String identifier) {
+    public JSONObject onboard(KeyPair keyPair, KeyType type, String identifier) {
 
         JSONObject transaction = new JSONObject();
         JSONObject $sigs = new JSONObject();

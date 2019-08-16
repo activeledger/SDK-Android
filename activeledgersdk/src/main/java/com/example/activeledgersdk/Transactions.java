@@ -31,7 +31,7 @@ public class Transactions {
     }
 
 
-    public static JSONObject registerNamespaceTransaction(String namespace, String identityStream,String identifier) {
+    public static JSONObject registerNamespaceTransaction(String namespace, String identityStream, String identifier) {
 
         JSONObject transaction = new JSONObject();
 
@@ -92,7 +92,7 @@ public class Transactions {
 
             JSONObject $sigs = new JSONObject();
             String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
-            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(), ActiveLedgerSDK.getInstance().getKeyPair(), ActiveLedgerSDK.getInstance().getKeyType(),identifier);
+            String signature = ActiveLedgerSDK.getInstance().signMessage(signTransactionObject.getBytes(), ActiveLedgerSDK.getInstance().getKeyPair(), ActiveLedgerSDK.getInstance().getKeyType(), identifier);
             $sigs.put(identityStream, signature);
             transaction.put("$sigs", $sigs);
 
