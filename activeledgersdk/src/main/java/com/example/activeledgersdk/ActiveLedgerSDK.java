@@ -31,7 +31,6 @@ import com.example.activeledgersdk.event.ServerEventListener;
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
-import com.example.activeledgersdk.utility.ContractUploading;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.Utility;
 
@@ -59,17 +58,10 @@ public class ActiveLedgerSDK {
     private static ActiveLedgerSDK instance = null;
     private KeyPair keyPair;
 
-
     public static synchronized ActiveLedgerSDK getInstance() {
         if (instance == null)
             instance = new ActiveLedgerSDK();
         return instance;
-    }
-
-    // function takes trnascation JSON object, sigs JSON object and self sign flag) and creates and return an onboard transaction
-    public static JSONObject createBaseTransaction(JSONObject $tx, Boolean selfsign, JSONObject
-            $sigs) {
-        return ContractUploading.createBaseTransaction(null, $tx, selfsign, $sigs);
     }
 
     // this method can be used to sign a message using private key
