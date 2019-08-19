@@ -34,7 +34,6 @@ import com.example.activeledgersdk.onboard.OnboardIdentity;
 import com.example.activeledgersdk.utility.ContractUploading;
 import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.Utility;
-import com.here.oksse.ServerSentEvent;
 
 import org.json.JSONObject;
 
@@ -187,8 +186,8 @@ public class ActiveLedgerSDK {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public void subscribeToEvent(String protocol, String ip, String port, String stream, String contract, String event, ServerEventListener listener) {
-        SSEUtil.getInstance().subscribeToEvent(protocol,ip,port,stream,contract,event, listener);
+    public void subscribeToEvent(String protocol, String ip, String port, String url, ServerEventListener listener) {
+        SSEUtil.getInstance().subscribeToEvent(protocol, ip, port, url, listener);
     }
 
     public void tearDown() {

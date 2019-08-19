@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.agilitysciences.alsdk.databinding.ActivityMainBinding;
 import com.example.activeledgersdk.ActiveLedgerSDK;
 import com.example.activeledgersdk.event.Event;
+import com.example.activeledgersdk.utility.ApiURL;
 import com.example.activeledgersdk.utility.KeyType;
 
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initLayout();
 
         //SSE Event
-        mainActivityViewModel.subscribeToEvent("http","testnet-uk.activeledger.io", "5261",null,null,null);
+        mainActivityViewModel.subscribeToEvent("http", "testnet-uk.activeledger.io", "5261", ApiURL.subscribe);
         mainActivityViewModel.eventLiveData.observe(this, new android.arch.lifecycle.Observer<Event>() {
             @Override
             public void onChanged(@Nullable Event event) {

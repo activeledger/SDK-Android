@@ -49,23 +49,18 @@ public class SSEUtil {
         return instance;
     }
 
-    public String createURL(String protocol, String ip, String port, String stream, String contract, String event){
-        //TODO implement this
-        String url = "";
-        if(stream ==null && contract==null && event==null)
-         url = protocol+"://"+ip+":"+port+"//api/activity/subscribe";
-        else if(event==null && contract==null){
-            url = protocol+"://"+ip+":"+port+"//api/activity/subscribe";
-        }
-        else if()
+    public String createURL(String protocol, String ip, String port, String api) {
+
+        String url = protocol + "://" + ip + ":" + port + api;
+
         return url;
     }
 
-    public ServerSentEvent subscribeToEvent(String protocol, String ip, String port, String stream, String contract, String event, ServerEventListener listener) {
+    public ServerSentEvent subscribeToEvent(String protocol, String ip, String port, String api, ServerEventListener listener) {
         if (listener == null) {
             listener = createLister();
         }
-        String url = createURL(protocol, ip,port,stream,contract,event);
+        String url = createURL(protocol, ip, port, api);
         ServerSentEvent ssevent = HttpClient.getInstance().subscribeToEvent(url, listener);
         openEvents.add(ssevent);
         return ssevent;

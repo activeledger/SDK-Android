@@ -1,5 +1,6 @@
 package com.agilitysciences.alsdk;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.util.Log;
@@ -26,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivityViewModel extends ViewModel {
 
 
-    public MutableLiveData<Event> eventLiveData = SSEUtil.getInstance().eventLiveData;
+    public LiveData<Event> eventLiveData = SSEUtil.getInstance().eventLiveData;
     private Disposable disposable;
     private KeyPair key_Pair = null;
     private KeyType keyType = KeyType.RSA;
@@ -254,8 +255,9 @@ public class MainActivityViewModel extends ViewModel {
                 });
     }
 
-    public void subscribeToEvent(String protocol, String ip, String port, String stream, String contract, String event ) {
-        ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip,port,stream,contract,event, null);
+    public void subscribeToEvent(String protocol, String ip, String port, String url) {
+        //null to use default listener and observe the messages through 'eventLiveData' or create own listener to observe
+        ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null);
     }
 
 }
