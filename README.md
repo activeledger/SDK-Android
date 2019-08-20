@@ -76,6 +76,24 @@ Example:
 ActiveLedgerSDK.getInstance().onBoardKeys(keyPair, "ActiveLedgerAwesomeKey");
 ```
 
+## Creating and Signing Transaction
+
+Transactions can be created using Transactions class in the SDK. User can create complete transaction or just the $tx Object and SDK will create the complete transaction. User can also create Labeled Transaction using the example below. 
+$tx is a JSONObject that can be created by folowing Activeledger Documentation.
+
+```Java
+JSONObject transaction = Transactions.createLabeledTransaction($tx);
+```
+
+## Server Sent Event
+
+Server Sent Events can be subscribed by giving the protocol, ip and port. All the functional URLs can be found in Utility/ApiURL.
+User can create  their own ServerEventListener and observe the events or can pass null and Observe the LiveData variable "SSEUtil.getInstance().eventLiveData".
+
+```Java
+        ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null/ServerEventListener);
+```
+
 ## Executing a Transaction
 
 Execute method takes a transaction and will give an Observable in return with response in String format. User RxAndroid to subscribe to the Obserable.
