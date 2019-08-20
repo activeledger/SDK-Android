@@ -91,7 +91,7 @@ Server Sent Events can be subscribed by giving the protocol, ip and port. All th
 User can create  their own ServerEventListener and observe the events or can pass null and Observe the LiveData variable "SSEUtil.getInstance().eventLiveData".
 
 ```Java
-        ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null/ServerEventListener);
+ActiveLedgerSDK.getInstance().subscribeToEvent(protocol, ip, port, url, null/ServerEventListener);
 ```
 
 ## Executing a Transaction
