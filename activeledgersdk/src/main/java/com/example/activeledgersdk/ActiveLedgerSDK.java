@@ -25,9 +25,9 @@ package com.example.activeledgersdk;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.activeledgersdk.API.HttpClient;
 import com.example.activeledgersdk.event.SSEUtil;
 import com.example.activeledgersdk.event.ServerEventListener;
+import com.example.activeledgersdk.http.HttpClient;
 import com.example.activeledgersdk.key.KeyGenApi;
 import com.example.activeledgersdk.model.Territoriality;
 import com.example.activeledgersdk.onboard.OnboardIdentity;
@@ -116,8 +116,6 @@ public class ActiveLedgerSDK {
         return HttpClient.getInstance().sendTransaction(transactionJson)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
-
     }
 
     // does an HTTP hit and return territoriality details

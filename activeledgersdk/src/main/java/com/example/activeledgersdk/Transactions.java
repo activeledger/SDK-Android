@@ -2,7 +2,6 @@ package com.example.activeledgersdk;
 
 import android.util.Log;
 
-import com.example.activeledgersdk.utility.KeyType;
 import com.example.activeledgersdk.utility.PreferenceManager;
 import com.example.activeledgersdk.utility.Utility;
 
@@ -83,7 +82,7 @@ public class Transactions {
     }
 
     // this method can be used to create a transaction that uploads a contracr to the ledger
-    public static JSONObject createContractUploadTransaction(KeyType keyType) {
+    public static JSONObject createContractUploadTransaction() {
         JSONObject transaction = new JSONObject();
 
         try {
@@ -190,7 +189,6 @@ public class Transactions {
 
         JSONObject transaction = new JSONObject();
 
-
         try {
             if (territorialityReference != null)
                 transaction.put("$territoriality", territorialityReference);
@@ -206,7 +204,6 @@ public class Transactions {
         }
 
         Log.e("Base Transaction", transaction.toString());
-
 
         return transaction;
     }
@@ -234,9 +231,56 @@ public class Transactions {
         }
 
         return transaction;
-
     }
 
+
+    public static JSONObject createAndSignTransaction(JSONObject $tx) {
+        JSONObject transaction = new JSONObject();
+        JSONObject $sigs = new JSONObject();
+        String onboard_id = PreferenceManager.getInstance().getStringValueFromKey("onboard_id");
+
+        String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
+
+        try {
+
+            transaction.put("$tx", $tx);
+            transaction.put("$selfsign", false);
+            $sigs.put(onboard_id, ActiveLedgerSDK.signMessage(signTransactionObject.getBytes(), null, null, ""));
+            transaction.put("$sigs", $sigs);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Transaction", transaction.toString());
+
+        return transaction;
+    }
+
+
+    public static JSONObject createLabeledTransaction(JSONObject $tx) {
+        JSONObject transaction = new JSONObject();
+        JSONObject $sigs = new JSONObject();
+        String stream_id = "";
+        String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
+
+        try {
+
+            stream_id = $tx.getJSONObject("$i").getJSONObject($tx.getJSONObject("$i").keys().next()).getString("$stream");
+
+            transaction.put("$tx", $tx);
+            transaction.put("$selfsign", false);
+            $sigs.put(stream_id, ActiveLedgerSDK.signMessage(signTransactionObject.getBytes(), null, null, ""));
+            transaction.put("$sigs", $sigs);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.e("Transaction", transaction.toString());
+
+        return transaction;
+    }
 
 
 }

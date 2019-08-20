@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         initLayout();
 
         //SSE Event
-        mainActivityViewModel.subscribeToEvent("http", "testnet-uk.activeledger.io", "5261", ApiURL.subscribe);
+        mainActivityViewModel.subscribeToEvent("http", "testnet-uk.activeledger.io", "5261", ApiURL.subscribeURL());
         mainActivityViewModel.eventLiveData.observe(this, new android.arch.lifecycle.Observer<Event>() {
             @Override
             public void onChanged(@Nullable Event event) {

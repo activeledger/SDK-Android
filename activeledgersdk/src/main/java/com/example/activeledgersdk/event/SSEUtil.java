@@ -26,7 +26,7 @@ import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.WorkerThread;
 import android.util.Log;
 
-import com.example.activeledgersdk.API.HttpClient;
+import com.example.activeledgersdk.http.HttpClient;
 import com.here.oksse.ServerSentEvent;
 
 import java.util.ArrayList;

@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.example.activeledgersdk.API;
+package com.example.activeledgersdk.http;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

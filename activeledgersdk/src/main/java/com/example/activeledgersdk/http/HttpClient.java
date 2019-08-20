@@ -20,7 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.example.activeledgersdk.API;
+package com.example.activeledgersdk.http;
 
 import com.example.activeledgersdk.event.ServerEventListener;
 import com.example.activeledgersdk.utility.Utility;

@@ -122,7 +122,6 @@ public class OnboardIdentity {
             $i.put(ActiveLedgerSDK.KEYNAME, identity);
             $tx.put("$i", $i);
 
-
             try {
 
                 String signTransactionObject = Utility.getInstance().convertJSONObjectToString($tx);
@@ -131,7 +130,6 @@ public class OnboardIdentity {
             } catch (Exception e) {
                 throw new IllegalArgumentException("Unable to sign object:" + e.getMessage());
             }
-
 
             transaction.put("$tx", $tx);
             transaction.put("$selfsign", true);
